@@ -59,9 +59,9 @@ export default function Header(props: Props) {
 
       <AppBar
         component="nav"
-        color="default"
+        color="info"
         sx={{
-          boxShadow: "0px 0px 0px 0px #fff",
+          boxShadow:"2px 0px 5px 2px #ddd"
         }}
       >
         <Container>
@@ -121,7 +121,7 @@ export default function Header(props: Props) {
         </Drawer>
       </nav>
 
-      <Box component="main" sx={{ p: 3 }}>
+      <Box component="main">
         <Toolbar />
       </Box>
     </Box>

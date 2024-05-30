@@ -14,6 +14,9 @@ export const theme = createTheme({
     background: {
       default: "#fff",
     },
+    info: {
+      main: "#F8F8F8",
+    },
   },
   components: {
     MuiButton: {
@@ -39,3 +42,5 @@ export const theme = createTheme({
     },
   },
 });
+
+theme.shadows[1] = "0px 5px 22px lightgray";

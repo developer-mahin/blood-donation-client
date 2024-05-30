@@ -1,9 +1,13 @@
-const Page = () => {
+import AboutUsSection from "@/components/UI/HomePage/AboutUsSection";
+import HeroSection from "@/components/UI/HomePage/HeroSection";
+
+const HomePage = () => {
   return (
-    <div>
-      <h2>Welcome to the Page page</h2>
-    </div>
+    <>
+      <HeroSection />
+      <AboutUsSection />
+    </>
   );
 };
 
-export default Page;
+export default HomePage;
