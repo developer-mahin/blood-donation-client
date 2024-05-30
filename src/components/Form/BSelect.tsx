@@ -1,3 +1,4 @@
+import { TSelectInput } from "@/data/selectOptions";
 import {
   FormControl,
   FormHelperText,
@@ -15,18 +16,10 @@ type TInputProps = {
   variant?: "outlined" | "filled" | "standard";
   size?: "small" | "medium";
   sx?: SxProps;
-  options: any;
+  options: TSelectInput[];
 };
 
-const BSelect = ({
-  name,
-  label,
-  required,
-  variant,
-  size,
-  sx,
-  options,
-}: TInputProps) => {
+const BSelect = ({ name, label, variant, size, sx, options }: TInputProps) => {
   const { control } = useFormContext();
 
   return (
@@ -52,7 +45,7 @@ const BSelect = ({
             label={label}
             onChange={onChange}
           >
-            {options?.map((item: any) => (
+            {options?.map((item: TSelectInput) => (
               <MenuItem key={item.value} value={item.value}>
                 {item.label}
               </MenuItem>

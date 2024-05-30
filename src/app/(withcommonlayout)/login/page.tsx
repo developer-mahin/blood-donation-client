@@ -3,6 +3,7 @@
 import assets from "@/assets/assets";
 import BForm from "@/components/Form/BForm";
 import BInput from "@/components/Form/BInput";
+import SocialPlatform from "@/components/Shared/SocialPlatform/SocialPlatform";
 import { TLoginData, loginData } from "@/data/loginData";
 import {
   loginDefaultValues,
@@ -45,7 +46,7 @@ const LoginPage = () => {
             mb: 2,
           }}
         >
-          <Image src={assets.images.logo} alt="" width={250} height={100} />
+          <Image src={assets.images.logo} alt="" width={150} height={100} />
           <Typography variant="h5" component="h5" mt={1} fontWeight={600}>
             Login With Ghuri Foundation
           </Typography>
@@ -82,6 +83,8 @@ const LoginPage = () => {
           >
             Login
           </Button>
+
+          <SocialPlatform title="Login with Social Platform" />
 
           <Typography
             sx={{

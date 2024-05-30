@@ -1,47 +1,24 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import {
-  Button,
-  Container,
-  Grid,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
-
-import {
-  loginDefaultValues,
-  loginValidationSchema,
-} from "@/validation/login.validation";
 import assets from "@/assets/assets";
 import BForm from "@/components/Form/BForm";
 import BInput from "@/components/Form/BInput";
+import BSelect from "@/components/Form/BSelect";
 import { TRegister, registerData } from "@/data/registerData";
 import {
   defaultValues,
   registerValidation,
 } from "@/validation/register.validation";
-import BSelect from "@/components/Form/BSelect";
+import SocialPlatform from "@/components/Shared/SocialPlatform/SocialPlatform";
 
-const options = [
-  {
-    value: "yes",
-    label: "Yes",
-  },
-  {
-    value: "no",
-    label: "No",
-  },
-];
 const RegisterPages = () => {
-  const router = useRouter();
-
   const handleRegister: SubmitHandler<FieldValues> = async (data) => {
     try {
       console.log(data);
@@ -51,15 +28,9 @@ const RegisterPages = () => {
   };
 
   return (
-    <Stack
-      justifyContent="center"
-      alignItems="center"
-      //   sx={{
-      //     height: "100vh",
-      //   }}
-    >
+    <Stack justifyContent="center" alignItems="center">
       <Container
-        maxWidth="sm"
+        maxWidth="md"
         sx={{
           padding: "50px",
           boxShadow: 2,
@@ -72,7 +43,7 @@ const RegisterPages = () => {
             mb: 2,
           }}
         >
-          <Image src={assets.images.logo} alt="" width={250} height={100} />
+          <Image src={assets.images.logo} alt="" width={150} height={100} />
           <Typography variant="h5" component="h5" mt={1} fontWeight={600}>
             Registration with Ghuri Foundation
           </Typography>
@@ -85,18 +56,30 @@ const RegisterPages = () => {
         >
           <Grid container spacing={3}>
             {registerData.map((data: TRegister, i: number) => (
-              <Grid item key={i} md={data.column}>
-                <BInput
-                  label={data.label}
-                  type={data.type}
-                  name={data.name}
-                  variant="outlined"
-                  size="small"
-                />
-              </Grid>
+              <>
+                {!data.isSelect ? (
+                  <Grid item key={i} md={data.column}>
+                    <BInput
+                      label={data.label}
+                      type={data.type}
+                      name={data.name}
+                      variant="outlined"
+                      size="small"
+                    />
+                  </Grid>
+                ) : (
+                  <Grid item key={i} md={data.column}>
+                    <BSelect
+                      label={data.label}
+                      name={data.name}
+                      options={data.options!}
+                    />
+                  </Grid>
+                )}
+              </>
             ))}
           </Grid>
-          <BSelect options={options} label="Ready" name="blood" />
+
           <Button
             type="submit"
             fullWidth
@@ -106,6 +89,9 @@ const RegisterPages = () => {
           >
             Register
           </Button>
+
+          <SocialPlatform title="Registration with Social Platform" />
+
           <Typography
             sx={{
               textAlign: "center",
@@ -118,44 +104,6 @@ const RegisterPages = () => {
             </Link>
           </Typography>
         </BForm>
-
-        {/* <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
-          <Grid container spacing={3}>
-            {registerData.map((data: TRegister, i: number) => (
-              <Grid item key={i} md={data.column}>
-                <TextField
-                  label={data.label}
-                  type={data.type}
-                  variant="outlined"
-                  size="small"
-                  fullWidth
-                  {...register(data.name)}
-                  required
-                />
-              </Grid>
-            ))}
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            sx={{
-              mt: 3,
-            }}
-          >
-            Register
-          </Button>
-          <Typography
-            sx={{
-              textAlign: "center",
-              mt: 1,
-            }}
-          >
-            Do you already have an account?{" "}
-            <Link href="/login" className="text-[#1586FD] font-medium">
-              Login
-            </Link>
-          </Typography>
-        </form> */}
       </Container>
     </Stack>
   );

@@ -1,8 +1,12 @@
+import { TSelectInput, bloodGroup, isDonateBlood } from "./selectOptions";
+
 export type TRegister = {
   column: number;
   name: string;
   label: string;
-  type: string;
+  type?: string;
+  isSelect?: boolean;
+  options?: TSelectInput[];
 };
 
 export const registerData: TRegister[] = [
@@ -36,5 +40,19 @@ export const registerData: TRegister[] = [
     name: "location",
     label: "Location",
     type: "text",
+  },
+  {
+    column: 6,
+    name: "donate",
+    label: "Donate blood?",
+    isSelect: true,
+    options: isDonateBlood,
+  },
+  {
+    column: 6,
+    name: "bloodType",
+    label: "Blood Type",
+    isSelect: true,
+    options: bloodGroup,
   },
 ];

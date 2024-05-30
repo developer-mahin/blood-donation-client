@@ -39,7 +39,7 @@ export default function Header(props: Props) {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item: TNavItems, i:number) => (
+        {navItems.map((item: TNavItems, i: number) => (
           <ListItem component={Link} href={item.path} key={i} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
               <ListItemText primary={item.title} />
@@ -77,7 +77,10 @@ export default function Header(props: Props) {
             </IconButton>
             <Typography
               variant="h6"
-              component="div"
+              component={Link}
+              href="/"
+              fontWeight={600}
+              color="secondary.main"
               sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
             >
               Ghuri Foundation
