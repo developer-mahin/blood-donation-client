@@ -3,10 +3,10 @@ import { createTheme } from "@mui/material/styles";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#556cd6",
+      main: "#101010",
     },
     secondary: {
-      main: "#19857b",
+      main: "#3E3E3E",
     },
     error: {
       main: "#ff1744",
@@ -28,7 +28,7 @@ export const theme = createTheme({
     },
     MuiContainer: {
       defaultProps: {
-        maxWidth: "xl",
+        maxWidth: "lg",
       },
     },
   },
