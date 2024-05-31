@@ -30,7 +30,7 @@ const RegisterPages = () => {
   return (
     <Stack justifyContent="center" alignItems="center">
       <Container
-        maxWidth="md"
+        maxWidth="sm"
         sx={{
           padding: "50px",
           boxShadow: 2,

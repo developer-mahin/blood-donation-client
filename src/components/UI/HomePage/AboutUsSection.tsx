@@ -1,6 +1,5 @@
-/* eslint-disable react/no-unescaped-entities */
 import assets from "@/assets/assets";
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 
 const AboutUsSection = () => {
@@ -22,6 +21,7 @@ const AboutUsSection = () => {
       des: "Create a supportive community where donors and recipients can share their experiences and encourage others to participate in this vital cause.",
     },
   ];
+
   return (
     <Box
       sx={{
@@ -55,7 +55,7 @@ const AboutUsSection = () => {
               The primary purpose of our website is to facilitate life-saving
               blood donations by providing a reliable and user-centric platform.
               We aim to bridge the gap between donors and recipients, ensuring
-              that blood is available when and where it's needed most.
+              that blood is available when and where it&rsquos needed most.
             </Typography>
 
             <Box>

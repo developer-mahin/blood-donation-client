@@ -4,7 +4,7 @@ import XIcon from "@mui/icons-material/X";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import AppleIcon from "@mui/icons-material/Apple";
 
-const SocialPlatform = ({ title }: { title: string }) => {
+const SocialPlatform = ({ title }: { title?: string }) => {
   const socialIcons = [
     <FacebookIcon
       key="facebook"
@@ -38,17 +38,19 @@ const SocialPlatform = ({ title }: { title: string }) => {
         my: 3,
       }}
     >
-      <Typography
-        variant="h6"
-        component="h6"
-        textAlign="center"
-        fontWeight={600}
-        sx={{
-          my: 2,
-        }}
-      >
-        {title}
-      </Typography>
+      {title && (
+        <Typography
+          variant="h6"
+          component="h6"
+          textAlign="center"
+          fontWeight={600}
+          sx={{
+            my: 2,
+          }}
+        >
+          {title}
+        </Typography>
+      )}
       <Stack
         direction="row"
         alignItems="center"

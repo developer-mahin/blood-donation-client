@@ -10,7 +10,7 @@ import {
   loginValidationSchema,
 } from "@/validation/login.validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { FieldValues, SubmitHandler } from "react-hook-form";
@@ -25,11 +25,10 @@ const LoginPage = () => {
   };
 
   return (
-    <Stack
-      justifyContent="center"
-      alignItems="center"
+    <Box
       sx={{
-        height: "80vh",
+        margin: "auto",
+        mt:4
       }}
     >
       <Container
@@ -99,7 +98,7 @@ const LoginPage = () => {
           </Typography>
         </BForm>
       </Container>
-    </Stack>
+    </Box>
   );
 };
 
