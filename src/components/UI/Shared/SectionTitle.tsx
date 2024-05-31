@@ -8,6 +8,7 @@ const SectionTitle = ({ title, des }: { title: string; des?: string }) => {
         variant="h4"
         component="h4"
         fontWeight={600}
+        textTransform="capitalize"
       >
         {title}
       </Typography>
