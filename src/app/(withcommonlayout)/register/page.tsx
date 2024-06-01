@@ -1,22 +1,21 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Container, Grid, Stack, Typography } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { FieldValues, SubmitHandler } from "react-hook-form";
-import { toast } from "sonner";
 import assets from "@/assets/assets";
 import BForm from "@/components/Form/BForm";
 import BInput from "@/components/Form/BInput";
 import BSelect from "@/components/Form/BSelect";
+import SocialPlatform from "@/components/Shared/SocialPlatform/SocialPlatform";
 import { TRegister, registerData } from "@/data/registerData";
 import {
   defaultValues,
   registerValidation,
 } from "@/validation/register.validation";
-import SocialPlatform from "@/components/Shared/SocialPlatform/SocialPlatform";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, Container, Grid, Stack, Typography } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 
 const RegisterPages = () => {
   const handleRegister: SubmitHandler<FieldValues> = async (data) => {
@@ -28,7 +27,13 @@ const RegisterPages = () => {
   };
 
   return (
-    <Stack justifyContent="center" alignItems="center">
+    <Stack
+      justifyContent="center"
+      alignItems="center"
+      sx={{
+        my: 4,
+      }}
+    >
       <Container
         maxWidth="sm"
         sx={{

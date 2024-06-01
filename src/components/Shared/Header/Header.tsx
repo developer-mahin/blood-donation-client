@@ -1,6 +1,7 @@
 "use client";
 
 import { TNavItems, navItems } from "@/data/navItems";
+import { isLoggedIn } from "@/service/auth.service";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Container, Stack } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
@@ -17,6 +18,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import * as React from "react";
+import AuthButton from "../AuthButton/AuthButton";
+import dynamic from "next/dynamic";
 
 interface Props {
   window?: () => Window;
@@ -25,8 +28,18 @@ interface Props {
 const drawerWidth = 240;
 
 export default function Header(props: Props) {
+  const AuthButton = dynamic(
+    () => import("../../Shared/AuthButton/AuthButton"),
+    {
+      ssr: false,
+    }
+  );
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const loginUser = isLoggedIn();
+  console.log(loginUser);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -61,7 +74,7 @@ export default function Header(props: Props) {
         component="nav"
         color="info"
         sx={{
-          boxShadow:"2px 0px 5px 2px #ddd"
+          boxShadow: "2px 0px 5px 2px #ddd",
         }}
       >
         <Container>
@@ -94,6 +107,7 @@ export default function Header(props: Props) {
                     </Typography>
                   </Link>
                 ))}
+                <AuthButton />
               </Stack>
             </Box>
           </Toolbar>

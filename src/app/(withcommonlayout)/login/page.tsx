@@ -5,6 +5,8 @@ import BForm from "@/components/Form/BForm";
 import BInput from "@/components/Form/BInput";
 import SocialPlatform from "@/components/Shared/SocialPlatform/SocialPlatform";
 import { TLoginData, loginData } from "@/data/loginData";
+import { TLoginProps, loginUser } from "@/service/actions/loginUser";
+import { storeUserInfo } from "@/service/auth.service";
 import {
   loginDefaultValues,
   loginValidationSchema,
@@ -19,6 +21,15 @@ import { toast } from "sonner";
 const LoginPage = () => {
   const handleLogin: SubmitHandler<FieldValues> = async (data) => {
     try {
+      const res = await loginUser(data as TLoginProps);
+
+      if (res.success) {
+        storeUserInfo({ accessToken: res.data.token });
+        toast.success(res.message);
+        // router.push("/dashboard");
+      } else {
+        toast.error(res.message);
+      }
     } catch (error: any) {
       toast.error(error.message);
     }
@@ -27,8 +38,7 @@ const LoginPage = () => {
   return (
     <Box
       sx={{
-        margin: "auto",
-        mt:4
+        my: 4,
       }}
     >
       <Container
