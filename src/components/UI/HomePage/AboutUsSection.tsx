@@ -1,6 +1,7 @@
 import assets from "@/assets/assets";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
+import SectionTitle from "../Shared/SectionTitle";
 
 const AboutUsSection = () => {
   const mission = [
@@ -35,14 +36,7 @@ const AboutUsSection = () => {
             <Image src={assets.images.about} alt="" width={700} height={400} />
           </Grid>
           <Grid item md={5}>
-            <Typography
-              variant="h3"
-              component="h1"
-              gutterBottom
-              fontWeight={600}
-            >
-              About Us
-            </Typography>
+            <SectionTitle title="About Us"/>
             <Typography
               variant="body1"
               color="textSecondary"

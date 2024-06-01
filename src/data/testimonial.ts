@@ -12,7 +12,7 @@ export type TTestimonial = {
 
 export const testimonialsData: TTestimonial[] = [
   {
-    id: "7e2f1234-12b3-4cde-9f23-b48c8112d467",
+    id: "1",
     name: "John Doe",
     email: "johndoe@gmail.com",
     bloodType: "A_POSITIVE",
@@ -21,7 +21,7 @@ export const testimonialsData: TTestimonial[] = [
     image: assets.testimonial.one,
   },
   {
-    id: "9a3g4b56-23c4-5d67-8e34-c49d8123e578",
+    id: "2",
     name: "Jane Smith",
     email: "janesmith@gmail.com",
     bloodType: "B_NEGATIVE",
@@ -31,7 +31,7 @@ export const testimonialsData: TTestimonial[] = [
     image: assets.testimonial.two,
   },
   {
-    id: "2d4e5f78-34d5-6e78-9f45-d50e9134f689",
+    id: "3",
     name: "Emily Davis",
     email: "emilydavis@gmail.com",
     bloodType: "AB_POSITIVE",
@@ -41,7 +41,7 @@ export const testimonialsData: TTestimonial[] = [
     image: assets.testimonial.three,
   },
   {
-    id: "5f6g7h89-45e6-7f89-0a56-e61f0245g790",
+    id: "4",
     name: "Michael Brown",
     email: "michaelbrown@gmail.com",
     bloodType: "O_POSITIVE",
@@ -50,7 +50,7 @@ export const testimonialsData: TTestimonial[] = [
     image: assets.testimonial.four,
   },
   {
-    id: "8h9i0j01-56f7-8g90-1b67-f72g1356h801",
+    id: "5",
     name: "Sarah Wilson",
     email: "sarahwilson@gmail.com",
     bloodType: "A_NEGATIVE",
@@ -59,7 +59,7 @@ export const testimonialsData: TTestimonial[] = [
     image: assets.testimonial.five,
   },
   {
-    id: "1j2k3l12-67g8-9h01-2c78-g83h2467i912",
+    id: "6",
     name: "David Martinez",
     email: "davidmartinez@gmail.com",
     bloodType: "B_POSITIVE",
@@ -68,7 +68,7 @@ export const testimonialsData: TTestimonial[] = [
     image: assets.testimonial.six,
   },
   {
-    id: "3l4m5n23-78h9-0i12-3d89-h94i3578j023",
+    id: "7",
     name: "Laura Garcia",
     email: "lauragarcia@gmail.com",
     bloodType: "AB_NEGATIVE",
@@ -77,7 +77,7 @@ export const testimonialsData: TTestimonial[] = [
     image: assets.testimonial.seven,
   },
   {
-    id: "6n7o8p34-89i0-1j23-4e90-i05j4689k134",
+    id: "8",
     name: "Robert Taylor",
     email: "roberttaylor@gmail.com",
     bloodType: "O_NEGATIVE",
@@ -87,7 +87,7 @@ export const testimonialsData: TTestimonial[] = [
     image: assets.testimonial.eight,
   },
   {
-    id: "9p0q1r45-90j1-2k34-5f01-j16k5790l245",
+    id: "9",
     name: "Maria Hernandez",
     email: "mariahernandez@gmail.com",
     bloodType: "A_POSITIVE",

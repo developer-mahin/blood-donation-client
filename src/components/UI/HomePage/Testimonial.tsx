@@ -6,6 +6,7 @@ import {
   Card,
   CardContent,
   Container,
+  Stack,
   Typography,
   useMediaQuery,
   useTheme,
@@ -37,7 +38,15 @@ const Testimonials = () => {
       }}
     >
       <Container>
-        <SectionTitle title="Testimonial" />
+        <SectionTitle
+          title="Testimonial"
+          des="See what  satisfied people are saying about their amazing experiences with us."
+        />
+        <Box
+          sx={{
+            pb: 2,
+          }}
+        />
         <Slider {...settings}>
           {testimonialsData.map((testimonial: TTestimonial) => (
             <Box key={testimonial.id} sx={{ padding: "0 10px" }}>
@@ -47,46 +56,56 @@ const Testimonials = () => {
                   maxWidth: 600,
                   borderRadius: "15px",
                   boxShadow: 3,
+                  border: "1px solid #ddd",
+                  py: 2,
                 }}
               >
                 <CardContent>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      marginBottom: "15px",
-                    }}
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="center"
                   >
                     <Box
                       sx={{
-                        mr: 1,
+                        display: "flex",
+                        alignItems: "center",
+                        flexDirection: "column",
+                        marginBottom: "15px",
                       }}
                     >
-                      <Image
-                        src={testimonial.image}
-                        width={80}
-                        height={80}
-                        alt=""
-                        style={{
-                          borderRadius: "50px",
-                          objectFit: "cover",
-                          width: "80px",
-                          height: "80px",
+                      <Box
+                        sx={{
+                          mr: 1,
                         }}
-                      />
+                      >
+                        <Image
+                          src={testimonial.image}
+                          width={80}
+                          height={80}
+                          alt=""
+                          style={{
+                            borderRadius: "50px",
+                            objectFit: "cover",
+                            width: "80px",
+                            height: "80px",
+                          }}
+                        />
+                      </Box>
+                      <Box textAlign="center">
+                        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                          {testimonial.name}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                          {testimonial.location}
+                        </Typography>
+                      </Box>
                     </Box>
-                    <Box>
-                      <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                        {testimonial.name}
-                      </Typography>
-                      <Typography variant="body2" color="textSecondary">
-                        {testimonial.location}
-                      </Typography>
-                    </Box>
-                  </Box>
+                  </Stack>
                   <Typography
                     variant="body1"
-                    sx={{ fontStyle: "italic", marginBottom: "15px" }}
+                    fontStyle="italic"
+                    textAlign="center"
                   >
                     &quot;{testimonial.message}&quot;
                   </Typography>
