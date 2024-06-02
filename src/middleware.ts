@@ -1,0 +1,54 @@
+import { cookies } from "next/headers";
+import { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import { authKey, userRole } from "./constant/common";
+import { decodedToken } from "./utils/jwtDecode";
+
+const authRoutes = ["/login", "/register"];
+
+// This function can be marked `async` if using `await` inside
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const accessToken = cookies().get("refreshToken");
+
+  if (!accessToken) {
+    if (authRoutes.includes(pathname)) {
+      return NextResponse.next();
+    } else {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
+
+  // if (pathname === "/donor") {
+  //   return NextResponse.next();
+  // }
+
+  let decodedData = null;
+
+  if (accessToken) {
+    decodedData = decodedToken(accessToken.value) as any;
+  }
+
+  if (!decodedData) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  console.log(decodedData);
+
+  const role = decodedData?.role;
+
+  if (pathname === "/dashboard/admin") {
+    if (role === userRole.ADMIN) {
+      return NextResponse.next();
+    } else {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
+
+  return NextResponse.redirect(new URL("/", request.url));
+}
+
+// See "Matching Paths" below to learn more
+export const config = {
+  matcher: ["/dashboard/:page*", "/login", "/register"],
+};

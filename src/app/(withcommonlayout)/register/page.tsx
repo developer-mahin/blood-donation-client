@@ -18,6 +18,7 @@ import { Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import React from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -82,9 +83,9 @@ const RegisterPages = () => {
         >
           <Grid container spacing={3}>
             {registerData.map((data: TRegister, i: number) => (
-              <>
+              <React.Fragment key={i}>
                 {!data.isSelect ? (
-                  <Grid item key={i} md={data.column}>
+                  <Grid item md={data.column}>
                     <BInput
                       label={data.label}
                       type={data.type}
@@ -94,7 +95,7 @@ const RegisterPages = () => {
                     />
                   </Grid>
                 ) : (
-                  <Grid item key={i} md={data.column}>
+                  <Grid item md={data.column}>
                     <BSelect
                       label={data.label}
                       name={data.name}
@@ -102,7 +103,7 @@ const RegisterPages = () => {
                     />
                   </Grid>
                 )}
-              </>
+              </React.Fragment>
             ))}
           </Grid>
 

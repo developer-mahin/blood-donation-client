@@ -6,7 +6,7 @@ import Testimonials from "@/components/UI/HomePage/Testimonial";
 
 const HomePage = () => {
   return (
-    <>
+    <> 
       <HeroSection />
       <AboutUsSection />
       <Campaign />
