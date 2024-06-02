@@ -1,4 +1,4 @@
-import { authKey } from "@/constant/authKey";
+import { authKey } from "@/constant/common";
 import { getNewAccessToken } from "@/service/auth.service";
 import { TGenericErrorResponse, TResponseSuccessType } from "@/types";
 import { getFromLocalStorage, setToLocalStorage } from "@/utils/localStorage";

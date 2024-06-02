@@ -1,3 +1,4 @@
+import { userRole } from "@/constant/common";
 import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 
@@ -30,3 +31,5 @@ export type TGenericErrorMessage = {
   path: string | number;
   message: string;
 };
+
+export type TUserRole = keyof typeof userRole;

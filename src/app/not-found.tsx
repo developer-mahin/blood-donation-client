@@ -2,7 +2,7 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 import Link from "next/link";
 
-const NotFound = () => {
+const NotFoundPage = () => {
   return (
     <Box
       display="flex"
@@ -52,4 +52,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default NotFoundPage;

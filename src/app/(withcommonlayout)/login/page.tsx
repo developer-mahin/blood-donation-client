@@ -15,10 +15,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
 const LoginPage = () => {
+  const router = useRouter();
   const handleLogin: SubmitHandler<FieldValues> = async (data) => {
     try {
       const res = await loginUser(data as TLoginProps);
@@ -26,7 +28,7 @@ const LoginPage = () => {
       if (res.success) {
         storeUserInfo({ accessToken: res.data.token });
         toast.success(res.message);
-        // router.push("/dashboard");
+        router.refresh();
       } else {
         toast.error(res.message);
       }

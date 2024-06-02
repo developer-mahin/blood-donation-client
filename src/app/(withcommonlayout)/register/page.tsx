@@ -6,6 +6,9 @@ import BInput from "@/components/Form/BInput";
 import BSelect from "@/components/Form/BSelect";
 import SocialPlatform from "@/components/Shared/SocialPlatform/SocialPlatform";
 import { TRegister, registerData } from "@/data/registerData";
+import { loginUser } from "@/service/actions/loginUser";
+import { registerUser } from "@/service/actions/registerUser";
+import { storeUserInfo } from "@/service/auth.service";
 import {
   defaultValues,
   registerValidation,
@@ -14,13 +17,31 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
 const RegisterPages = () => {
+  const router = useRouter();
   const handleRegister: SubmitHandler<FieldValues> = async (data) => {
     try {
       console.log(data);
+
+      const res = await registerUser(data);
+
+      if (res.success) {
+        const result = await loginUser({
+          email: data.email,
+          password: data.password,
+        });
+        if (result.success) {
+          storeUserInfo({ accessToken: result.data.token });
+          toast.success("Account Created And Logged In Successfully");
+          router.refresh();
+        }
+      } else {
+        toast.error(res.message);
+      }
     } catch (error: any) {
       toast.error(error.message);
     }

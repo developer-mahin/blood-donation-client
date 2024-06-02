@@ -39,7 +39,6 @@ export default function Header(props: Props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const loginUser = isLoggedIn();
-  console.log(loginUser);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -99,10 +98,10 @@ export default function Header(props: Props) {
               Ghuri Foundation
             </Typography>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Stack direction="row" gap={3}>
+              <Stack direction="row" gap={3} alignItems="center">
                 {navItems.map((item: TNavItems, i: number) => (
                   <Link href={item.path} key={i}>
-                    <Typography fontWeight={500} color="secondary.main">
+                    <Typography fontWeight={600} color="secondary.main">
                       {item.title}
                     </Typography>
                   </Link>

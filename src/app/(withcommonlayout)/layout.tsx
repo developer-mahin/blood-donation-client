@@ -1,7 +1,7 @@
 import Footer from "@/components/Shared/Footer/Footer";
 import Header from "@/components/Shared/Header/Header";
 
-const Layout = ({
+const CommonLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -15,4 +15,4 @@ const Layout = ({
   );
 };
 
-export default Layout;
+export default CommonLayout;

@@ -1,6 +1,6 @@
 "use server";
 
-import { authKey } from "@/constant/authKey";
+import { authKey } from "@/constant/common";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 

@@ -1,4 +1,4 @@
-import { authKey } from "@/constant/authKey";
+import { authKey } from "@/constant/common";
 import { decodedToken } from "@/utils/jwtDecode";
 import {
   getFromLocalStorage,
@@ -20,7 +20,7 @@ export const getUserInfo = () => {
   }
   return {
     ...decodedData,
-    role: decodedData?.role.toLowerCase(),
+    role: decodedData?.role?.toLowerCase(),
   };
 };
 
