@@ -9,7 +9,7 @@ const authRoutes = ["/login", "/register"];
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const accessToken = cookies().get("refreshToken");
+  const accessToken = cookies().get(authKey);
 
   if (!accessToken) {
     if (authRoutes.includes(pathname)) {
@@ -19,9 +19,9 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // if (pathname === "/donor") {
-  //   return NextResponse.next();
-  // }
+  if (pathname === "/donor") {
+    return NextResponse.next();
+  }
 
   let decodedData = null;
 
@@ -33,9 +33,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  console.log(decodedData);
-
   const role = decodedData?.role;
+
+  if (pathname === "/profile") {
+    if (role === userRole.DONOR || role === userRole.ADMIN) {
+      return NextResponse.next();
+    }
+  }
 
   if (pathname === "/dashboard/admin") {
     if (role === userRole.ADMIN) {
@@ -50,5 +54,5 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/dashboard/:page*", "/login", "/register"],
+  matcher: ["/dashboard/:page*", "/login", "/register", "/profile"],
 };

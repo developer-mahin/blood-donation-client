@@ -12,4 +12,8 @@ export const navItems: TNavItems[] = [
     title: "About Us",
     path: "/about-us",
   },
+  {
+    title: "Donor",
+    path: "/donor",
+  },
 ];

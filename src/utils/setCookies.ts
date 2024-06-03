@@ -7,9 +7,13 @@ import { redirect } from "next/navigation";
 const setAccessToken = (
   token: string,
   option?: {
-    redirect: string;
+    redirect: string | undefined;
   }
 ) => {
+
+  console.log(token)
+
+
   if (token) {
     cookies().set(authKey, token);
   }

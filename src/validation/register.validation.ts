@@ -8,7 +8,7 @@ export const registerValidation = z
     confirmPassword: z
       .string()
       .min(6, "Password must be at least 6 characters"),
-    donate: z.string().min(1, "Please select if your are donate blood or not"),
+    isDonate: z.string().min(1, "Please select if your are donate blood or not"),
     bloodType: z.string().min(1, "Please select a blood type"),
     location: z.string().min(1, "Please Enter Location"),
   })

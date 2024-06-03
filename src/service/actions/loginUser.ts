@@ -1,3 +1,5 @@
+"use server"
+
 import { baseurl } from "@/constant/URL";
 import setAccessToken from "@/utils/setCookies";
 
@@ -6,7 +8,10 @@ export type TLoginProps = {
   password: string;
 };
 
-export const loginUser = async (payload: TLoginProps) => {
+export const loginUser = async (
+  payload: TLoginProps,
+  redirect?: string | undefined
+) => {
   const res = await fetch(`${baseurl}/auth/login`, {
     method: "POST",
     headers: {
@@ -16,11 +21,10 @@ export const loginUser = async (payload: TLoginProps) => {
     credentials: "include",
   });
 
-  const loginInfo = await res.json();
-
-  if (loginInfo.data.accessToken) {
-    setAccessToken(loginInfo.data.accessToken);
+  const data = await res.json();
+  if (data.success && data?.data?.token) {
+    setAccessToken(data?.data?.token, { redirect });
   }
 
-  return loginInfo;
+  return data;
 };

@@ -1,5 +1,5 @@
 import { logoutUser } from "@/service/actions/logoutUser";
-import { isLoggedIn } from "@/service/auth.service";
+import { getUserInfo, isLoggedIn } from "@/service/auth.service";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -8,6 +8,7 @@ import { toast } from "sonner";
 const AuthButton = () => {
   const loginUser = isLoggedIn();
   const router = useRouter();
+  const user = getUserInfo();
 
   const handleLogOut = () => {
     logoutUser(router);
@@ -19,11 +20,20 @@ const AuthButton = () => {
       <Stack direction="row" gap={3} alignItems="center">
         {loginUser ? (
           <>
-            <Link href="/dashboard/admin">
+            <Link href="/profile">
               <Typography fontWeight={600} color="secondary.main">
                 My Profile
               </Typography>
             </Link>
+
+            {user.role === "admin" && (
+              <Link href="/dashboard/admin">
+                <Typography fontWeight={600} color="secondary.main">
+                  Dashboard
+                </Typography>
+              </Link>
+            )}
+
             <Button
               sx={{
                 fontWight: "600",

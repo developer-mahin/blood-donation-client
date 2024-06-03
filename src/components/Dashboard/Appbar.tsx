@@ -155,7 +155,7 @@ export default function DashboardAppBar() {
       <Box position="static">
         <Toolbar>
           <Box>
-            <Typography>Hi,Mahin</Typography>
+            {/* <Typography>Hi,{data.name}</Typography> */}
             <Typography
               color="primary.main"
               variant="h5"
@@ -190,8 +190,8 @@ export default function DashboardAppBar() {
                 color: "#000",
               }}
             >
-              {/* <Avatar alt={data?.name} src={data?.profilePhoto} /> */}
-              Hello
+              {/* <Avatar alt={data?.name} src={data?.photo} /> */}
+
               <ArrowDropDownIcon />
             </IconButton>
           </Box>

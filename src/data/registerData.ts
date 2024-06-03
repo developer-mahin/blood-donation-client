@@ -43,7 +43,7 @@ export const registerData: TRegister[] = [
   },
   {
     column: 6,
-    name: "donate",
+    name: "isDonate",
     label: "Donate blood?",
     isSelect: true,
     options: isDonateBlood,
