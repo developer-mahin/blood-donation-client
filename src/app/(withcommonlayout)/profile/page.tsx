@@ -1,118 +1,122 @@
-// import AutoFileUploader from "@/components/Form/AutoFileUploder";
-import LoadingSpinner from "@/components/Shared/LoadingSpinner/LoadingSpinner";
-import { baseurl } from "@/constant/URL";
-import { authKey } from "@/constant/common";
-import { TAuthUser, TUser } from "@/types";
-import { getFromLocalStorage } from "@/utils/localStorage";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import KeyIcon from "@mui/icons-material/Key";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
+"use client";
+
 import { Box, Button, Container } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-import { cookies } from "next/headers";
 import Image from "next/image";
+import React, { useState } from "react";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import KeyIcon from "@mui/icons-material/Key";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import {
+  useGetMyProfileQuery,
+  useUpdateMyProfileMutation,
+} from "@/redux/api/Features/user/myProfile";
+import Spinner from "@/components/Shared/Spinner/Spinner";
+import AutoFileUploader from "@/components/Form/AutoFileUploder";
+import Information from "./component/Information";
+import ProfileUpdateModal from "./component/ProfileUpdateModal";
+import { imageUploadIntoImgbb } from "@/utils/imageUploadIntoImgBB";
 
-const MyProfile = async () => {
-  const token = cookies().get(authKey);
+const MyProfile = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  let data: TUser | undefined;
+  const { data, isLoading } = useGetMyProfileQuery({});
+  const [updateMyProfile, { isLoading: updating }] =
+    useUpdateMyProfileMutation();
 
-  if (!token) {
-    return redirect("/login");
-  }
+  const fileUploadHandler = async (file: File) => {
+    const formData = new FormData();
+    formData.append("image", file);
 
-  // const res = await fetch(`${baseurl}/user/my-profile`, {
-  //   headers: {
-  //     "Content-type": "application/json",
-  //     Authorization: token.value,
-  //   },
-  //   next: {
-  //     tags: ["profile"],
-  //   },
-  // });
-  // const result = await res.json();
-  // console.log(result);
-  // data = result?.data;
+    const uploadedImage = await imageUploadIntoImgbb(formData);
 
-  // const fileUploadHandler = async (file: File) => {
-  //   const formData = new FormData();
-  //   formData.append("file", file);
-  //   formData.append("data", JSON.stringify({}));
+    let data = {
+      photo: uploadedImage,
+    };
 
-  //   try {
-  //     updateMYProfile(formData);
-  //   } catch (error: any) {
-  //     console.error(error.message);
-  //   }
-  // };
+    if (uploadedImage) {
+      data = {
+        photo: uploadedImage,
+      };
+    }
+
+    try {
+      updateMyProfile(data);
+    } catch (error: any) {
+      console.error(error.message);
+    }
+  };
 
   return (
     <>
-      {/* <ProfileUpdateModal
+      <ProfileUpdateModal
         open={isModalOpen}
         setOpen={setIsModalOpen}
         id={data?.id}
-      /> */}
-      <Container sx={{ mt: 4 }}>
-        {/* <Grid container spacing={4}>
-          <Grid xs={12} md={4}>
-            <Box
-              sx={{
-                height: 300,
-                width: "100%",
-                overflow: "hidden",
-                borderRadius: 1,
-              }}
-            >
-              {data.profilePhoto && (
-                <Image
-                  height={300}
-                  width={400}
-                  src={data?.profilePhoto && data?.profilePhoto}
-                  alt="Choose User Photo"
-                />
-              )}
-            </Box>
-            <Box my={3}>
-              {updating ? (
-                <p>Uploading...</p>
-              ) : (
-                <AutoFileUploader
-                  name="file"
-                  label="Choose Your Profile Photo"
-                  icon={<CloudUploadIcon />}
-                  onFileUpload={fileUploadHandler}
-                  variant="text"
-                />
-              )}
-            </Box>
+      />
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <Container sx={{ mt: 4 }}>
+          <Grid container spacing={4}>
+            <Grid xs={12} md={4}>
+              <Box
+                sx={{
+                  height: 300,
+                  width: "100%",
+                  overflow: "hidden",
+                  borderRadius: 1,
+                }}
+              >
+                {data?.userProfile?.photo && (
+                  <Image
+                    height={300}
+                    width={400}
+                    src={data?.userProfile?.photo}
+                    alt="Choose User Photo"
+                  />
+                )}
+              </Box>
+              <Box my={3}>
+                {updating ? (
+                  <p>Uploading...</p>
+                ) : (
+                  <AutoFileUploader
+                    name="file"
+                    label="Choose Your Profile Photo"
+                    icon={<CloudUploadIcon />}
+                    onFileUpload={fileUploadHandler}
+                    variant="text"
+                  />
+                )}
+              </Box>
 
-            <Button
-              fullWidth
-              endIcon={<ModeEditIcon />}
-              onClick={() => setIsModalOpen(true)}
-            >
-              Edit Profile
-            </Button>
-            <Button
-              fullWidth
-              endIcon={<KeyIcon />}
-              sx={{
-                mt: 2,
-              }}
-              component={Link}
-              href="/change_password"
-            >
-              Change Password
-            </Button>
+              <Button
+                fullWidth
+                endIcon={<ModeEditIcon />}
+                onClick={() => setIsModalOpen(true)}
+              >
+                Edit Profile
+              </Button>
+              <Button
+                fullWidth
+                endIcon={<KeyIcon />}
+                sx={{
+                  mt: 2,
+                }}
+                component={Link}
+                href="/change_password"
+              >
+                Change Password
+              </Button>
+            </Grid>
+            <Grid xs={12} md={8}>
+              <Information data={data} />
+            </Grid>
           </Grid>
-          <Grid xs={12} md={8}>
-            <DoctorInformation data={data} />
-          </Grid>
-        </Grid> */}
-      </Container>
+        </Container>
+      )}
     </>
   );
 };
