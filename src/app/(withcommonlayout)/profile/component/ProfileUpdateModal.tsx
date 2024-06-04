@@ -6,7 +6,7 @@ import Spinner from "@/components/Shared/Spinner/Spinner";
 import {
   useGetMyProfileQuery,
   useUpdateMyProfileMutation,
-} from "@/redux/api/Features/user/myProfile";
+} from "@/redux/api/Features/user/userApi";
 import { dateFormatter } from "@/utils/dateFormatter";
 import { Button, Grid } from "@mui/material";
 import React from "react";

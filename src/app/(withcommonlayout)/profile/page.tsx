@@ -8,15 +8,15 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import KeyIcon from "@mui/icons-material/Key";
 import Link from "next/link";
-import {
-  useGetMyProfileQuery,
-  useUpdateMyProfileMutation,
-} from "@/redux/api/Features/user/myProfile";
 import Spinner from "@/components/Shared/Spinner/Spinner";
 import AutoFileUploader from "@/components/Form/AutoFileUploder";
 import Information from "./component/Information";
 import ProfileUpdateModal from "./component/ProfileUpdateModal";
 import { imageUploadIntoImgbb } from "@/utils/imageUploadIntoImgBB";
+import {
+  useGetMyProfileQuery,
+  useUpdateMyProfileMutation,
+} from "@/redux/api/Features/user/userApi";
 
 const MyProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
