@@ -17,6 +17,9 @@ import {
   useGetMyProfileQuery,
   useUpdateMyProfileMutation,
 } from "@/redux/api/Features/user/userApi";
+import { imgbburl } from "@/constant/URL";
+import { toast } from "sonner";
+import ImageUpload from "./component/ImageUpload";
 
 const MyProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,6 +33,8 @@ const MyProfile = () => {
     formData.append("image", file);
 
     const uploadedImage = await imageUploadIntoImgbb(formData);
+
+    console.log(uploadedImage);
 
     let data = {
       photo: uploadedImage,
@@ -79,7 +84,7 @@ const MyProfile = () => {
                 )}
               </Box>
               <Box my={3}>
-                {updating ? (
+                {/* {updating ? (
                   <p>Uploading...</p>
                 ) : (
                   <AutoFileUploader
@@ -89,7 +94,8 @@ const MyProfile = () => {
                     onFileUpload={fileUploadHandler}
                     variant="text"
                   />
-                )}
+                )} */}
+                <ImageUpload />
               </Box>
 
               <Button

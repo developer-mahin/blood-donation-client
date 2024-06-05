@@ -49,7 +49,9 @@ const Information = ({ data }: any) => {
           <Typography variant="caption" color="secondary">
             Availability
           </Typography>
-          <Typography>{data?.availability ? "True" : "False"}</Typography>
+          <Typography>
+            {data?.availability ? "Available" : "Not Available"}
+          </Typography>
         </StyledInformationBox>
       </Stack>
 

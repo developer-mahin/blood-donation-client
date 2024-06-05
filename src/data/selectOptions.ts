@@ -44,3 +44,14 @@ export const bloodGroup: TSelectInput[] = [
     label: "O_NEGATIVE",
   },
 ];
+
+export const availabilityOption: TSelectInput[] = [
+  {
+    value: "yes",
+    label: "Available",
+  },
+  {
+    value: "no",
+    label: "Unavailable",
+  },
+];

@@ -27,19 +27,14 @@ const BDatePicker = ({
     <Controller
       name={name}
       control={control}
-      defaultValue={dayjs(new Date().toDateString())}
       render={({ field: { onChange, value, ...field } }) => {
         return (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DesktopDatePicker
-              formatDensity={undefined}
-              enableAccessibleFieldDOMStructure={undefined}
-              selectedSections={undefined}
-              onSelectedSectionsChange={undefined}
               label={label}
               {...field}
               onChange={(date) => onChange(date)}
-              value={value || Date.now()}
+              value={value ? dayjs(value) : null}
               slotProps={{
                 textField: {
                   required: required,

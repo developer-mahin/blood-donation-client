@@ -1,13 +1,13 @@
-import FilterDonor from "@/components/UI/HomePage/FilterDonor";
-import SingleDonor from "@/components/UI/HomePage/SingleDonor";
-import SectionTitle from "@/components/UI/Shared/SectionTitle";
-import { baseurl } from "@/constant/URL";
 import { TUser } from "@/types";
-import generateDonorListApi from "@/utils/generateDonorListApi";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Link from "next/link";
+import { baseurl } from "@/constant/URL";
+import generateDonorListApi from "@/utils/generateDonorListApi";
+import FilterDonor from "./FilterDonor";
+import SingleDonor from "./SingleDonor";
+import SectionTitle from "../Shared/SectionTitle";
 
-const DonorPage = async ({
+const BloodDonor = async ({
   searchParams,
 }: {
   searchParams?: {
@@ -58,8 +58,13 @@ const DonorPage = async ({
           ))
         )}
       </Grid>
+      <Box sx={{ textAlign: "center", mt: "2rem" }}>
+        <Button LinkComponent={Link} href="/donors">
+          View All
+        </Button>
+      </Box>
     </Container>
   );
 };
 
-export default DonorPage;
+export default BloodDonor;

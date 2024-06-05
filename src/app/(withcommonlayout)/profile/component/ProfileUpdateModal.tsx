@@ -1,8 +1,10 @@
 import BDatePicker from "@/components/Form/BDatePicker";
 import BForm from "@/components/Form/BForm";
 import BInput from "@/components/Form/BInput";
+import BSelect from "@/components/Form/BSelect";
 import HCModal from "@/components/Modal/BFullScreenModal";
 import Spinner from "@/components/Shared/Spinner/Spinner";
+import { availabilityOption } from "@/data/selectOptions";
 import {
   useGetMyProfileQuery,
   useUpdateMyProfileMutation,
@@ -24,6 +26,8 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
 
   const handleFormSubmit: SubmitHandler<FieldValues> = async (values) => {
     values.lastDonationDate = dateFormatter(values.lastDonationDate);
+    values.availability = values.availability === "yes" ? true : false;
+    values.age = Number(values.age);
 
     try {
       const res = await updateMyProfile(values);
@@ -68,6 +72,13 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
             </Grid>
             <Grid item md={6}>
               <BInput label="Bio" type="text" name="bio" />
+            </Grid>
+            <Grid item md={6}>
+              <BSelect
+                label="Available"
+                name="availability"
+                options={availabilityOption}
+              />
             </Grid>
             <Grid item md={6}>
               <BDatePicker label="Last Donation Date" name="lastDonationDate" />
