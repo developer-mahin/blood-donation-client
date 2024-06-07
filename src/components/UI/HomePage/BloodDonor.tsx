@@ -16,7 +16,7 @@ const BloodDonor = async ({
     availability?: string;
   };
 }) => {
-  const URL = generateDonorListApi(`${baseurl}/donor/donor-list?limit=8`, {
+  const URL = generateDonorListApi(`${baseurl}/donor/donor-list?limit=6`, {
     searchTerm: searchParams?.searchTerm,
     bloodType: searchParams?.bloodType,
     availability: searchParams?.availability,
@@ -27,7 +27,6 @@ const BloodDonor = async ({
     headers: {
       "Content-Type": "application/json",
     },
-    cache: "no-store",
   });
 
   const result = await res.json();
@@ -59,7 +58,7 @@ const BloodDonor = async ({
         )}
       </Grid>
       <Box sx={{ textAlign: "center", mt: "2rem" }}>
-        <Button LinkComponent={Link} href="/donors">
+        <Button component={Link} href="/donor">
           View All
         </Button>
       </Box>

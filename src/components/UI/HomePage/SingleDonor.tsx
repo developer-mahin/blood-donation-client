@@ -1,13 +1,10 @@
 import assets from "@/assets/assets";
 import { TUser } from "@/types";
-import { Button, Card, CardContent, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 
 const SingleDonor = ({ donor }: { donor: TUser }) => {
-
-  console.log(donor.id)
-
   return (
     <Card
       sx={{
@@ -21,7 +18,7 @@ const SingleDonor = ({ donor }: { donor: TUser }) => {
         <>
           <Image
             src={donor?.userProfile?.photo}
-            className="border-2 border-green-500 p-2 rounded-xl"
+            className="border-2 border-green-500 p-2 rounded-xl h-[350px] object-cover"
             alt={donor.name}
             height={300}
             width={500}
@@ -31,7 +28,7 @@ const SingleDonor = ({ donor }: { donor: TUser }) => {
         <>
           <Image
             src={assets.testimonial.one}
-            className="border-2 border-green-500 p-2 rounded-xl"
+            className="border-2 border-green-500 p-2 rounded-xl h-[350px] object-cover"
             alt={donor.name}
             height={300}
             width={500}

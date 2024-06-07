@@ -2,10 +2,10 @@ import FilterDonor from "@/components/UI/HomePage/FilterDonor";
 import SingleDonor from "@/components/UI/HomePage/SingleDonor";
 import SectionTitle from "@/components/UI/Shared/SectionTitle";
 import { baseurl } from "@/constant/URL";
-import { TUser } from "@/types";
+import { TMeta, TUser } from "@/types";
 import generateDonorListApi from "@/utils/generateDonorListApi";
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import Link from "next/link";
+import { Container, Grid, Typography } from "@mui/material";
+import PaginationController from "./components/PaginationController";
 
 const DonorPage = async ({
   searchParams,
@@ -14,24 +14,33 @@ const DonorPage = async ({
     searchTerm?: string;
     bloodType?: string;
     availability?: string;
+    page?: string;
+    limit?: number;
   };
 }) => {
-  const URL = generateDonorListApi(`${baseurl}/donor/donor-list?limit=8`, {
-    searchTerm: searchParams?.searchTerm,
-    bloodType: searchParams?.bloodType,
-    availability: searchParams?.availability,
-  });
+  const page = searchParams?.page ? parseInt(searchParams.page, 10) : 1;
+
+  const URL = generateDonorListApi(
+    `${baseurl}/donor/donor-list?limit=6&page=${page}`,
+    {
+      searchTerm: searchParams?.searchTerm,
+      bloodType: searchParams?.bloodType,
+      availability: searchParams?.availability,
+    }
+  );
 
   const res = await fetch(`${URL}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
-    cache: "no-store",
   });
 
   const result = await res.json();
   const data: TUser[] = result?.data || [];
+  const meta: TMeta = result.meta;
+
+  const totalPage = Math.ceil(meta.total / meta.limit);
 
   return (
     <Container
@@ -58,6 +67,7 @@ const DonorPage = async ({
           ))
         )}
       </Grid>
+      <PaginationController totalPages={totalPage} currentPage={page} />
     </Container>
   );
 };

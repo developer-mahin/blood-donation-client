@@ -63,19 +63,23 @@ const Information = ({ data }: any) => {
           <Typography variant="caption" color="secondary">
             Age
           </Typography>
-          <Typography>{data?.userProfile?.age}</Typography>
+          <Typography>
+            {data?.userProfile?.age === 0 ? "N/A" : data?.userProfile?.age}
+          </Typography>
         </StyledInformationBox>
         <StyledInformationBox>
           <Typography variant="caption" color="secondary">
             Contact Number
           </Typography>
-          <Typography>{data?.userProfile?.contactNumber}</Typography>
+          <Typography>{data?.userProfile?.contactNumber || "N/A"}</Typography>
         </StyledInformationBox>
         <StyledInformationBox>
           <Typography variant="caption" color="secondary">
             Last Donation Date
           </Typography>
-          <Typography>{data?.userProfile?.lastDonationDate}</Typography>
+          <Typography>
+            {data?.userProfile?.lastDonationDate || "N/A"}
+          </Typography>
         </StyledInformationBox>
         <StyledInformationBox>
           <Typography variant="caption" color="secondary">
@@ -95,7 +99,7 @@ const Information = ({ data }: any) => {
           <Typography variant="caption" color="secondary">
             Bio
           </Typography>
-          <Typography>{data?.userProfile?.bio}</Typography>
+          <Typography>{data?.userProfile?.bio || "N/A"}</Typography>
         </StyledInformationBox>
       </Stack>
     </>

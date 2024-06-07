@@ -1,57 +1,36 @@
 "use client";
 
-import { Box, Button, Container } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-import Image from "next/image";
-import React, { useState } from "react";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import KeyIcon from "@mui/icons-material/Key";
-import Link from "next/link";
 import Spinner from "@/components/Shared/Spinner/Spinner";
-import AutoFileUploader from "@/components/Form/AutoFileUploder";
-import Information from "./component/Information";
-import ProfileUpdateModal from "./component/ProfileUpdateModal";
-import { imageUploadIntoImgbb } from "@/utils/imageUploadIntoImgBB";
 import {
   useGetMyProfileQuery,
   useUpdateMyProfileMutation,
 } from "@/redux/api/Features/user/userApi";
-import { imgbburl } from "@/constant/URL";
+import KeyIcon from "@mui/icons-material/Key";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import { Box, Button, Container } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import ImageUpload from "./component/ImageUpload";
+import Information from "./component/Information";
+import ProfileUpdateModal from "./component/ProfileUpdateModal";
 
 const MyProfile = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [image, setImage] = useState<string>("");
 
   const { data, isLoading } = useGetMyProfileQuery({});
-  const [updateMyProfile, { isLoading: updating }] =
-    useUpdateMyProfileMutation();
+  const [updateMyProfile] = useUpdateMyProfileMutation();
 
-  const fileUploadHandler = async (file: File) => {
-    const formData = new FormData();
-    formData.append("image", file);
-
-    const uploadedImage = await imageUploadIntoImgbb(formData);
-
-    console.log(uploadedImage);
-
-    let data = {
-      photo: uploadedImage,
-    };
-
-    if (uploadedImage) {
-      data = {
-        photo: uploadedImage,
-      };
+  useEffect(() => {
+    if (image && image !== "") {
+      updateMyProfile({ photo: image });
+      toast.success("successfully your profile image updated");
+      setImage("");
     }
-
-    try {
-      updateMyProfile(data);
-    } catch (error: any) {
-      console.error(error.message);
-    }
-  };
+  }, [image]);
 
   return (
     <>
@@ -84,18 +63,7 @@ const MyProfile = () => {
                 )}
               </Box>
               <Box my={3}>
-                {/* {updating ? (
-                  <p>Uploading...</p>
-                ) : (
-                  <AutoFileUploader
-                    name="file"
-                    label="Choose Your Profile Photo"
-                    icon={<CloudUploadIcon />}
-                    onFileUpload={fileUploadHandler}
-                    variant="text"
-                  />
-                )} */}
-                <ImageUpload />
+                <ImageUpload setImage={setImage} />
               </Box>
 
               <Button
