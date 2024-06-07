@@ -1,96 +1,87 @@
-"use client";
-
-import Spinner from "@/components/Shared/Spinner/Spinner";
-import {
-  useGetMyProfileQuery,
-  useUpdateMyProfileMutation,
-} from "@/redux/api/Features/user/userApi";
+import { baseurl } from "@/constant/URL";
+import { authKey } from "@/constant/common";
+import { logoutUser } from "@/service/actions/logoutUser";
+import { TUser } from "@/types";
 import KeyIcon from "@mui/icons-material/Key";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Box, Button, Container } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
+import dynamic from "next/dynamic";
+import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
-import ImageUpload from "./component/ImageUpload";
+import { redirect } from "next/navigation";
 import Information from "./component/Information";
-import ProfileUpdateModal from "./component/ProfileUpdateModal";
 
-const MyProfile = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [image, setImage] = useState<string>("");
+const MyProfile = async () => {
+  const Upload = dynamic(() => import("./component/Upload"), {
+    ssr: false,
+  });
+  const ModalContent = dynamic(() => import("./component/ModalContent"), {
+    ssr: false,
+  });
 
-  const { data, isLoading } = useGetMyProfileQuery({});
-  const [updateMyProfile] = useUpdateMyProfileMutation();
+  const token = cookies().get(authKey);
 
-  useEffect(() => {
-    if (image && image !== "") {
-      updateMyProfile({ photo: image });
-      toast.success("successfully your profile image updated");
-      setImage("");
-    }
-  }, [image]);
+  if (!token?.value) {
+    logoutUser();
+    redirect("/login");
+  }
+
+  const res = await fetch(`${baseurl}/user/my-profile`, {
+    headers: {
+      authorization: token.value,
+    },
+  });
+
+  const result = await res.json();
+  const data: TUser = result?.data;
 
   return (
     <>
-      <ProfileUpdateModal
-        open={isModalOpen}
-        setOpen={setIsModalOpen}
-        id={data?.id}
-      />
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <Container sx={{ mt: 4 }}>
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4}>
-              <Box
-                sx={{
-                  height: 300,
-                  width: "100%",
-                  overflow: "hidden",
-                  borderRadius: 1,
-                }}
-              >
-                {data?.userProfile?.photo && (
-                  <Image
-                    height={300}
-                    width={400}
-                    src={data?.userProfile?.photo}
-                    alt="Choose User Photo"
-                  />
-                )}
-              </Box>
-              <Box my={3}>
-                <ImageUpload setImage={setImage} />
-              </Box>
+      <Container sx={{ mt: 4 }}>
+        <Grid container spacing={4}>
+          <Grid xs={12} md={4}>
+            <Box
+              sx={{
+                height: 300,
+                width: "100%",
+                overflow: "hidden",
+                borderRadius: 1,
+              }}
+            >
+              {data?.userProfile?.photo && (
+                <Image
+                  height={300}
+                  width={400}
+                  src={data?.userProfile?.photo}
+                  alt="Choose User Photo"
+                />
+              )}
+            </Box>
+            <Box my={3}>
+              {/* For Profile Photo change */}
+              <Upload />
+            </Box>
+            {/* For Profile info update */}
+            <ModalContent id={data.id} />
 
-              <Button
-                fullWidth
-                endIcon={<ModeEditIcon />}
-                onClick={() => setIsModalOpen(true)}
-              >
-                Edit Profile
-              </Button>
-              <Button
-                fullWidth
-                endIcon={<KeyIcon />}
-                sx={{
-                  mt: 2,
-                }}
-                component={Link}
-                href="/change_password"
-              >
-                Change Password
-              </Button>
-            </Grid>
-            <Grid xs={12} md={8}>
-              <Information data={data} />
-            </Grid>
+            <Button
+              fullWidth
+              endIcon={<KeyIcon />}
+              sx={{
+                mt: 2,
+              }}
+              component={Link}
+              href="/change_password"
+            >
+              Change Password
+            </Button>
           </Grid>
-        </Container>
-      )}
+          <Grid xs={12} md={8}>
+            <Information data={data} />
+          </Grid>
+        </Grid>
+      </Container>
     </>
   );
 };

@@ -3,7 +3,6 @@
 import { baseurl } from "@/constant/URL";
 
 export const registerUser = async (payload: any) => {
-  console.log(payload);
   const res = await fetch(`${baseurl}/auth/register`, {
     method: "POST",
     headers: {

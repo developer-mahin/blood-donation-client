@@ -12,6 +12,7 @@ interface IDatePicker {
   required?: boolean;
   fullWidth?: boolean;
   sx?: SxProps;
+  disablePast?: any;
 }
 
 const BDatePicker = ({
@@ -20,6 +21,7 @@ const BDatePicker = ({
   label,
   required,
   fullWidth = true,
+  disablePast,
   sx,
 }: IDatePicker) => {
   const { control } = useFormContext();
@@ -33,6 +35,7 @@ const BDatePicker = ({
             <DesktopDatePicker
               label={label}
               {...field}
+              disablePast={disablePast}
               onChange={(date) => onChange(date)}
               value={value ? dayjs(value) : null}
               slotProps={{

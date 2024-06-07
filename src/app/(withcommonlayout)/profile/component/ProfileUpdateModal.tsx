@@ -10,6 +10,8 @@ import {
   useUpdateMyProfileMutation,
 } from "@/redux/api/Features/user/userApi";
 import { dateFormatter } from "@/utils/dateFormatter";
+import { profileUpdateSchema } from "@/validation/profileUpdate.validation";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Grid } from "@mui/material";
 import React from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
@@ -55,6 +57,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
       ) : (
         <BForm
           onSubmit={handleFormSubmit}
+          resolver={zodResolver(profileUpdateSchema)}
           defaultValues={data && defaultValues}
         >
           <Grid container spacing={4} mt={2}>

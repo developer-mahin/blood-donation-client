@@ -1,6 +1,5 @@
 import { cookies } from "next/headers";
-import { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { authKey, userRole } from "./constant/common";
 import { decodedToken } from "./utils/jwtDecode";
 
@@ -54,5 +53,11 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/dashboard/:page*", "/login", "/register", "/profile"],
+  matcher: [
+    "/dashboard/:page*",
+    "/login",
+    "/register",
+    "/profile",
+    "/donor/:id",
+  ],
 };

@@ -34,6 +34,7 @@ const AuthButton = () => {
               </Link>
             )}
 
+            {/* <LogoutButton handleLogOut={handleLogOut} token={token} /> */}
             <Button
               sx={{
                 fontWight: "600",

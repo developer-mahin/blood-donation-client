@@ -1,17 +1,5 @@
-import { Box, Stack, styled, Typography } from "@mui/material";
-
-const StyledInformationBox = styled(Box)(({ theme }) => ({
-  background: "#f4f7fe",
-  borderRadius: theme.spacing(1),
-  width: "45%",
-  padding: "8px 16px",
-  "& p": {
-    fontWeight: 600,
-  },
-  [theme.breakpoints.down("md")]: {
-    width: "100%",
-  },
-}));
+import { Box, Stack, Typography } from "@mui/material";
+import { StyledInformationBox } from "./StyledInformationBox";
 
 const Information = ({ data }: any) => {
   return (
@@ -95,12 +83,18 @@ const Information = ({ data }: any) => {
               : null}
           </Typography>
         </StyledInformationBox>
-        <StyledInformationBox>
+        <Box
+          sx={{
+            background: "#f4f7fe",
+            padding: "8px 16px",
+            borderRadius: "10px"
+          }}
+        >
           <Typography variant="caption" color="secondary">
             Bio
           </Typography>
           <Typography>{data?.userProfile?.bio || "N/A"}</Typography>
-        </StyledInformationBox>
+        </Box>
       </Stack>
     </>
   );

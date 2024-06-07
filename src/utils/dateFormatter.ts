@@ -1,4 +1,4 @@
-export const dateFormatter = (value: string) => {
+export const dateFormatter = (value: any) => {
   const date = new Date(value);
   // Get the year, month, and day
   const year = date.getFullYear();

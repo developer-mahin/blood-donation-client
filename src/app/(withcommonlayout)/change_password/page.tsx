@@ -1,18 +1,17 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
-import { FieldValues } from "react-hook-form";
-import { z } from "zod";
-import KeyIcon from "@mui/icons-material/Key";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 import BForm from "@/components/Form/BForm";
 import BInput from "@/components/Form/BInput";
-import { logoutUser } from "@/service/actions/logoutUser";
-import { getUserInfo } from "@/service/auth.service";
 import { useChangePasswordMutation } from "@/redux/api/Features/auth/authApi";
+import { logoutUser } from "@/service/actions/logoutUser";
+import { zodResolver } from "@hookform/resolvers/zod";
+import KeyIcon from "@mui/icons-material/Key";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
 export type TChangePassword = {
   column: number;

@@ -1,7 +1,6 @@
 "use client";
 
 import { TNavItems, navItems } from "@/data/navItems";
-import { isLoggedIn } from "@/service/auth.service";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Container, Stack } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
@@ -16,10 +15,9 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import * as React from "react";
-import AuthButton from "../AuthButton/AuthButton";
-import dynamic from "next/dynamic";
 
 interface Props {
   window?: () => Window;
@@ -37,9 +35,6 @@ export default function Header(props: Props) {
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  const loginUser = isLoggedIn();
-
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };

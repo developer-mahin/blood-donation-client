@@ -10,10 +10,6 @@ const setAccessToken = (
     redirect: string | undefined;
   }
 ) => {
-
-  console.log(token)
-
-
   if (token) {
     cookies().set(authKey, token);
   }
