@@ -8,7 +8,6 @@ import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 type TDonorDetailsPageProps = { params: { id: string } };
 
@@ -31,10 +30,11 @@ const DonorDetailsPage = async ({ params }: TDonorDetailsPageProps) => {
     return logoutUser();
   }
 
-  const res = await fetch(`${baseurl}/user/get-single-user/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/user/get-single-user/${id}`, {
     headers: {
       authorization: token.value as string,
     },
+    
   });
   const result = await res.json();
 
