@@ -8,19 +8,22 @@ import {
 import Spinner from "@/components/Shared/Spinner/Spinner";
 import {
   useChangeUserProfileStatusMutation,
+  useChangeUserRoleMutation,
   useGetAlUserQuery,
 } from "@/redux/api/Features/user/userApi";
-import { Box, Button, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { toast } from "sonner";
 
 const UsersPage = () => {
   const { data, isLoading } = useGetAlUserQuery({});
   const [changeUserProfileStatus] = useChangeUserProfileStatusMutation();
+  const [changeUserRole] = useChangeUserRoleMutation();
 
   if (isLoading) {
     return <Spinner />;
@@ -34,7 +37,23 @@ const UsersPage = () => {
 
     try {
       const res = await changeUserProfileStatus(data);
-      console.log(res);
+      if (res.data) {
+        toast.success("successfully update the status");
+      }
+    } catch (error) {}
+  };
+
+  const handleChangeRole = async (id: string, role: string) => {
+    const data = {
+      id,
+      role,
+    };
+
+    try {
+      const res = await changeUserRole(data);
+      if (res.data) {
+        toast.success("successfully update the role");
+      }
     } catch (error) {}
   };
 
@@ -85,17 +104,19 @@ const UsersPage = () => {
                         alignItems: "center",
                       }}
                     >
-                      <Typography
-                        sx={{
-                          fontSize: "14px",
-                          fontWeight: "700",
-                        }}
-                      >
-                        Change Role:
-                      </Typography>
                       <Box>
-                        <SmallButton size="small">Admin</SmallButton>
-                        <SmallButton size="small">Donor</SmallButton>
+                        <SmallButton
+                          size="small"
+                          onClick={() => handleChangeRole(item.id, "ADMIN")}
+                        >
+                          Admin
+                        </SmallButton>
+                        <SmallButton
+                          size="small"
+                          onClick={() => handleChangeRole(item.id, "DONOR")}
+                        >
+                          Donor
+                        </SmallButton>
                       </Box>
                     </Box>
 
@@ -106,15 +127,6 @@ const UsersPage = () => {
                         mt: 2,
                       }}
                     >
-                      <Typography
-                        sx={{
-                          fontSize: "14px",
-                          fontWeight: "700",
-                        }}
-                      >
-                        Change Status
-                      </Typography>
-
                       <Box>
                         <SmallButton
                           size="small"

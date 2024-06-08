@@ -1,8 +1,12 @@
+import AboutUsSection from "@/components/UI/HomePage/AboutUsSection";
+import ContactInfo from "./components/ContactInfo";
+
 const AboutUs = () => {
   return (
-    <div>
-      <h2>Welcome to the Page page</h2>
-    </div>
+    <>
+      <AboutUsSection />
+      <ContactInfo />
+    </>
   );
 };
 

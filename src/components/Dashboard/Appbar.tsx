@@ -1,3 +1,5 @@
+"use client";
+
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import MoreIcon from "@mui/icons-material/MoreVert";
@@ -18,9 +20,10 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { removeFromLocalStorage } from "@/utils/localStorage";
+import { useGetMyProfileQuery } from "@/redux/api/Features/user/userApi";
 
 export default function DashboardAppBar() {
-  //   const { data, isLoading } = useGetSingleUserQuery({});
+  const { data, isLoading } = useGetMyProfileQuery({});
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -51,12 +54,13 @@ export default function DashboardAppBar() {
     removeFromLocalStorage("accessToken");
     handleMenuClose();
     router.push("/login");
+    router.refresh();
     toast.success("User Logged successfully");
   };
 
-  //   if (isLoading) {
-  //     return <p>Loading...</p>;
-  //   }
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -155,14 +159,14 @@ export default function DashboardAppBar() {
       <Box position="static">
         <Toolbar>
           <Box>
-            {/* <Typography>Hi,{data.name}</Typography> */}
+            <Typography>Hi,{data.name}</Typography>
             <Typography
               color="primary.main"
               variant="h5"
               component="h4"
               fontWeight={500}
             >
-              Welcome To PH Health Care
+              Welcome To Ghuri Foundation
             </Typography>
           </Box>
           <Box sx={{ flexGrow: 1 }} />
@@ -190,7 +194,7 @@ export default function DashboardAppBar() {
                 color: "#000",
               }}
             >
-              {/* <Avatar alt={data?.name} src={data?.photo} /> */}
+              <Avatar alt={data?.name} src={data?.userProfile?.photo} />
 
               <ArrowDropDownIcon />
             </IconButton>

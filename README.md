@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Blood Donation System
 
-## Getting Started
+## Technology Stack:
 
-First, run the development server:
+- TypeScript for programming language
+- Next.js
+- Matarial UI
+- React Hook Form
+- Redux Toolkit
+- Axios
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Welcome to the Blood Donation website repository! This platform is designed to facilitate blood donations by connecting donors with recipients. Below you will find detailed information on the features, installation process, and how to contribute to the project.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### SERVER_URL : https://blooddonationproject.vercel.app/
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### FRONT_END_URL : https://blooddonationclient.vercel.app/
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Features
 
-## Learn More
+- Authentication: Login , Registration and Change Password
+- Donor Profiles:
+- Blood Management: Send, Receive Blood Donation and get Data as a donor and requester
+- Profile Management: Update profile info and profile image
+- Admin: Admin can manage users
 
-To learn more about Next.js, take a look at the following resources:
+## Admin Credentials
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- email : mdmahin1310@gmail.com
+- password: 308244
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Donor Credentials
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- email : johnydepp@gmail.com
+- password: 13104255

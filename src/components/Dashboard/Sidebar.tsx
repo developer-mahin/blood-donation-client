@@ -13,9 +13,9 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import GroupIcon from '@mui/icons-material/Group';
+import GroupIcon from "@mui/icons-material/Group";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-
+import KeyIcon from "@mui/icons-material/Key";
 import { useEffect, useState } from "react";
 
 const Sidebar = () => {
@@ -48,7 +48,7 @@ const Sidebar = () => {
           }}
           fontWeight={600}
         >
-          PH Health Care
+          Ghuri Foundation
         </Typography>
       </Stack>
       <Divider />
@@ -66,6 +66,14 @@ const Sidebar = () => {
             <ListItemButton>
               <ListItemIcon>{<GroupIcon />}</ListItemIcon>
               <ListItemText primary="Users" />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+        <Link href="/change_password">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>{<KeyIcon />}</ListItemIcon>
+              <ListItemText primary="Change Password" />
             </ListItemButton>
           </ListItem>
         </Link>
