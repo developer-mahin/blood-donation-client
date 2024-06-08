@@ -1,42 +1,24 @@
 "use client";
 
 import Spinner from "@/components/Shared/Spinner/Spinner";
-import { authKey } from "@/constant/common";
 import { useGetMyProfileQuery } from "@/redux/api/Features/user/userApi";
-import { TAuthUser } from "@/types";
-import { decodedToken } from "@/utils/jwtDecode";
-import { getFromLocalStorage } from "@/utils/localStorage";
 import KeyIcon from "@mui/icons-material/Key";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Box, Button, Container } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import Image from "next/image";
 import Link from "next/link";
-// import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Information from "./component/Information";
 import MyBloodRequest from "./component/MyBloodRequest";
 import MyDonationRequest from "./component/MyDonationRequest";
 import ProfileUpdateModal from "./component/ProfileUpdateModal";
 import Upload from "./component/Upload";
-import { JwtPayload } from "jwt-decode";
-import { useRouter } from "next/navigation";
 
 const MyProfile = () => {
-  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const { data, isLoading } = useGetMyProfileQuery({});
-  const token = getFromLocalStorage(authKey);
-  let userData;
-
-  if (token) {
-    userData = decodedToken(token) as any;
-  }
-
-  if (data?.role !== userData?.role) {
-    router.refresh();
-  }
 
   if (isLoading) {
     return <Spinner />;
