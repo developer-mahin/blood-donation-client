@@ -5,3 +5,8 @@ export const userRole = {
   DONOR: "DONOR",
 };
 
+export const requestStatus = {
+  PENDING: "PENDING",
+  APPROVED: "APPROVED",
+  REJECTED: "REJECTED",
+};

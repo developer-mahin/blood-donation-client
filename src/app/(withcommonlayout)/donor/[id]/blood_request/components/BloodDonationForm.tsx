@@ -35,10 +35,7 @@ const BloodDonationForm = ({ donorId, user }: TBloodRequestFormProps) => {
 
     try {
       const res = await createDonationRequest(data);
-      console.log(res);
-
       if (res?.success) {
-        // revalidateData("profile");
         router.push("/profile");
         toast.success("Request sent successfully");
       }

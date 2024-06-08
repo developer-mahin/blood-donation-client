@@ -1,40 +1,46 @@
-import { baseurl } from "@/constant/URL";
+"use client";
+
+import Spinner from "@/components/Shared/Spinner/Spinner";
 import { authKey } from "@/constant/common";
-import { logoutUser } from "@/service/actions/logoutUser";
-import { TUser } from "@/types";
+import { useGetMyProfileQuery } from "@/redux/api/Features/user/userApi";
+import { TAuthUser } from "@/types";
+import { decodedToken } from "@/utils/jwtDecode";
+import { getFromLocalStorage } from "@/utils/localStorage";
 import KeyIcon from "@mui/icons-material/Key";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Box, Button, Container } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import dynamic from "next/dynamic";
-import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+// import { useRouter } from "next/navigation";
+import { useState } from "react";
 import Information from "./component/Information";
+import MyBloodRequest from "./component/MyBloodRequest";
+import MyDonationRequest from "./component/MyDonationRequest";
+import ProfileUpdateModal from "./component/ProfileUpdateModal";
+import Upload from "./component/Upload";
+import { JwtPayload } from "jwt-decode";
+import { useRouter } from "next/navigation";
 
-const MyProfile = async () => {
-  const Upload = dynamic(() => import("./component/Upload"), {
-    ssr: false,
-  });
-  const ModalContent = dynamic(() => import("./component/ModalContent"), {
-    ssr: false,
-  });
+const MyProfile = () => {
+  const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const token = cookies().get(authKey);
+  const { data, isLoading } = useGetMyProfileQuery({});
+  const token = getFromLocalStorage(authKey);
+  let userData;
 
-  if (!token?.value) {
-    logoutUser();
-    redirect("/login");
+  if (token) {
+    userData = decodedToken(token) as any;
   }
 
-  const res = await fetch(`${baseurl}/user/my-profile`, {
-    headers: {
-      authorization: token.value,
-    },
-  });
+  if (data?.role !== userData?.role) {
+    router.refresh();
+  }
 
-  const result = await res.json();
-  const data: TUser = result?.data;
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>
@@ -63,7 +69,22 @@ const MyProfile = async () => {
               <Upload />
             </Box>
             {/* For Profile info update */}
-            <ModalContent id={data.id} />
+            {/* <ModalContent id={data.id} /> */}
+
+            <Box>
+              <ProfileUpdateModal
+                open={isModalOpen}
+                setOpen={setIsModalOpen}
+                // id={data?.id}
+              />
+              <Button
+                fullWidth
+                endIcon={<ModeEditIcon />}
+                onClick={() => setIsModalOpen(true)}
+              >
+                Edit Profile
+              </Button>
+            </Box>
 
             <Button
               fullWidth
@@ -81,6 +102,10 @@ const MyProfile = async () => {
             <Information data={data} />
           </Grid>
         </Grid>
+        <>
+          <MyBloodRequest />
+          <MyDonationRequest />
+        </>
       </Container>
     </>
   );

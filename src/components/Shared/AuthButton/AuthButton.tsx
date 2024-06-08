@@ -12,6 +12,7 @@ const AuthButton = () => {
 
   const handleLogOut = () => {
     logoutUser(router);
+    router.refresh();
     toast.success("log out successful");
   };
 
