@@ -48,7 +48,7 @@ const Testimonials = () => {
           }}
         />
         <Slider {...settings}>
-          {testimonialsData.map((testimonial: TTestimonial) => (
+          {testimonialsData?.map((testimonial: TTestimonial) => (
             <Box key={testimonial.id} sx={{ padding: "0 10px" }}>
               <Card
                 sx={{

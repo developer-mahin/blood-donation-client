@@ -47,7 +47,7 @@ const BloodDonationForm = ({ donorId, user }: TBloodRequestFormProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container gap={2}>
-        {bloodRequestData.map((item: TRequest, i: number) => (
+        {bloodRequestData?.map((item: TRequest, i: number) => (
           <Grid item key={i} md={5.5}>
             <TextField
               label={item.label}

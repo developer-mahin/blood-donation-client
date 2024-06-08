@@ -89,7 +89,7 @@ const ChangePassword = () => {
         resolver={zodResolver(changePasswordValidation)}
       >
         <Grid>
-          {changePasswordData.map((data: TChangePassword, i: number) => (
+          {changePasswordData?.map((data: TChangePassword, i: number) => (
             <Grid item key={i} md={12} my={2}>
               <BInput label={data.label} type={data.type} name={data.name} />
             </Grid>

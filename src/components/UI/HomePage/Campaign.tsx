@@ -88,7 +88,7 @@ const Campaign = () => {
         />
 
         <ImageList variant="quilted" cols={4}>
-          {itemData.map((item) => (
+          {itemData?.map((item) => (
             <ImageListItem
               key={item.img}
               cols={item.cols || 1}

@@ -35,7 +35,7 @@ export default function TableWrapper({ data }: any) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((item: any) => (
+            {data?.map((item: any) => (
               <StyledTableRow key={item.id}>
                 <StyledTableCell component="th" scope="row">
                   {item?.donor?.name}

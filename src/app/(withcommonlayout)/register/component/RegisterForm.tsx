@@ -54,7 +54,7 @@ const RegisterForm = () => {
       className="mt-6"
     >
       <Grid container spacing={3}>
-        {registerData.map((data: TRegister, i: number) => (
+        {registerData?.map((data: TRegister, i: number) => (
           <React.Fragment key={i}>
             {!data.isSelect ? (
               <Grid item md={data.column}>

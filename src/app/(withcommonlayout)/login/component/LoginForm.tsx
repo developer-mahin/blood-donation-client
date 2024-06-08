@@ -46,7 +46,7 @@ const LoginForm = () => {
       className="mt-6"
     >
       <Grid container spacing={3}>
-        {loginData.map((data: TLoginData, i: number) => (
+        {loginData?.map((data: TLoginData, i: number) => (
           <Grid item key={i} md={12}>
             <BInput label={data.label} type={data.type} name={data.name} />
           </Grid>
