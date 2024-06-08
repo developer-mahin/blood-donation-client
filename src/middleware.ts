@@ -40,7 +40,7 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  if (pathname === "/dashboard/admin") {
+  if (pathname === "/dashboard/admin/users") {
     if (role === userRole.ADMIN) {
       return NextResponse.next();
     } else {

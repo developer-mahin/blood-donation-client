@@ -36,8 +36,6 @@ export const donationApi = baseApi.injectEndpoints({
 
     changeDonationRequestStatus: build.mutation({
       query: (payload) => {
-        console.log({ payload });
-
         return {
           url: `/donor/donation-request/${payload.id}`,
           method: "PUT",

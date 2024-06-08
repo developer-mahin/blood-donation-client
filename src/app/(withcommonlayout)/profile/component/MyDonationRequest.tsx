@@ -7,40 +7,19 @@ import {
   useChangeDonationRequestStatusMutation,
   useGetMyDonationQuery,
 } from "@/redux/api/Features/donation/dontaionApi";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Badge, Box, Button, Stack, Typography } from "@mui/material";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { styled } from "@mui/material/styles";
-import React, { useState } from "react";
 import { toast } from "sonner";
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
+import {
+  SmallButton,
+  StyledTableCell,
+  StyledTableRow,
+} from "./StyledInformationBox";
 
 const MyDonationRequest = () => {
   const { data, isLoading } = useGetMyDonationQuery({});
@@ -138,91 +117,30 @@ const MyDonationRequest = () => {
                 </StyledTableCell>
 
                 <StyledTableCell>
-                  <Button
-                    sx={{
-                      // px: 2,
-                      py: "5px",
-                      px: "8px",
-                      textTransform: "capitalize",
-                    }}
+                  <SmallButton
                     size="small"
                     onClick={() =>
                       handleChangeRequestStatus(item.id, "PENDING")
                     }
                   >
                     PENDING
-                  </Button>
-                  <Button
-                    sx={{
-                      py: "5px",
-                      mx: "5px",
-                      px: "8px",
-                      textTransform: "capitalize",
-                    }}
+                  </SmallButton>
+                  <SmallButton
                     size="small"
                     onClick={() =>
                       handleChangeRequestStatus(item.id, "APPROVED")
                     }
                   >
                     APPROVE
-                  </Button>
-                  <Button
-                    sx={{
-                      py: "5px",
-                      px: "8px",
-                      textTransform: "capitalize",
-                    }}
+                  </SmallButton>
+                  <SmallButton
                     size="small"
                     onClick={() =>
                       handleChangeRequestStatus(item.id, "REJECTED")
                     }
                   >
                     REJECT
-                  </Button>
-                  {/* <div>
-                    <Button
-                      id="basic-button"
-                      aria-controls={open ? "basic-menu" : undefined}
-                      aria-haspopup="true"
-                      aria-expanded={open ? "true" : undefined}
-                      onClick={handleClick}
-                      variant="text"
-                    >
-                      <MoreVertIcon />
-                    </Button>
-
-                    <Menu
-                      id="basic-menu"
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleChangeRequestStatus}
-                      MenuListProps={{
-                        "aria-labelledby": "basic-button",
-                      }}
-                    >
-                      <MenuItem
-                        onClick={() => {
-                          handleChangeRequestStatus(item.id, "PENDING");
-                        }}
-                      >
-                        PENDING
-                      </MenuItem>
-                      <MenuItem
-                        onClick={() => {
-                          handleChangeRequestStatus(item.id, "APPROVE");
-                        }}
-                      >
-                        APPROVE
-                      </MenuItem>
-                      <MenuItem
-                        onClick={() => {
-                          handleChangeRequestStatus(item.id, "REJECT");
-                        }}
-                      >
-                        REJECT
-                      </MenuItem>
-                    </Menu>
-                  </div> */}
+                  </SmallButton>
                 </StyledTableCell>
               </StyledTableRow>
             ))}

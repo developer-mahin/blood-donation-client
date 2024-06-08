@@ -2,6 +2,7 @@
 
 import BForm from "@/components/Form/BForm";
 import BInput from "@/components/Form/BInput";
+import { TChangePassword, changePasswordData } from "@/data/changePasswordData";
 import { useChangePasswordMutation } from "@/redux/api/Features/auth/authApi";
 import { logoutUser } from "@/service/actions/logoutUser";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,34 +13,6 @@ import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-
-export type TChangePassword = {
-  column: number;
-  name: string;
-  label: string;
-  type?: string;
-};
-
-export const changePasswordData: TChangePassword[] = [
-  {
-    column: 6,
-    name: "currentPassword",
-    label: "Current Password",
-    type: "password",
-  },
-  {
-    column: 6,
-    name: "newPassword",
-    label: "New Password",
-    type: "password",
-  },
-  {
-    column: 6,
-    name: "confirmPassword",
-    label: "Confirm Password",
-    type: "password",
-  },
-];
 
 const changePasswordValidation = z
   .object({

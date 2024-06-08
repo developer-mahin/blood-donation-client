@@ -28,7 +28,7 @@ const AuthButton = () => {
             </Link>
 
             {user.role === "admin" && (
-              <Link href="/dashboard/admin">
+              <Link href="/dashboard/admin/users">
                 <Typography fontWeight={600} color="secondary.main">
                   Dashboard
                 </Typography>

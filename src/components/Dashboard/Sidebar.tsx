@@ -1,10 +1,20 @@
 import assets from "@/assets/assets";
 import { getUserInfo } from "@/service/auth.service";
-import { TUserRole } from "@/types";
-
-import { Box, Divider, List, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Stack,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import GroupIcon from '@mui/icons-material/Group';
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 import { useEffect, useState } from "react";
 
@@ -43,9 +53,22 @@ const Sidebar = () => {
       </Stack>
       <Divider />
       <List>
-        {/* {sidebarItems(userRole as TUserRole).map((item, index) => (
-          <SidebarItem key={index} item={item} index={index} />
-        ))} */}
+        <Link href="/profile">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>{<AccountBoxIcon />}</ListItemIcon>
+              <ListItemText primary="Profile" />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+        <Link href="/dashboard/admin/users">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>{<GroupIcon />}</ListItemIcon>
+              <ListItemText primary="Users" />
+            </ListItemButton>
+          </ListItem>
+        </Link>
       </List>
     </Box>
   );

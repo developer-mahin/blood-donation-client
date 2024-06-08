@@ -72,11 +72,7 @@ const MyProfile = () => {
             {/* <ModalContent id={data.id} /> */}
 
             <Box>
-              <ProfileUpdateModal
-                open={isModalOpen}
-                setOpen={setIsModalOpen}
-                // id={data?.id}
-              />
+              <ProfileUpdateModal open={isModalOpen} setOpen={setIsModalOpen} />
               <Button
                 fullWidth
                 endIcon={<ModeEditIcon />}

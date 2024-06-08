@@ -3,6 +3,14 @@ import { tagTypes } from "../../tagTypes";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
+    getAlUser: build.query({
+      query: () => ({
+        url: "/user/get-all-user",
+        method: "GET",
+      }),
+      providesTags: [tagTypes.user],
+    }),
+
     getMyProfile: build.query({
       query: () => ({
         url: "/user/my-profile",
@@ -21,7 +29,25 @@ export const userApi = baseApi.injectEndpoints({
       },
       invalidatesTags: [tagTypes.user],
     }),
+
+    changeUserProfileStatus: build.mutation({
+      query: (payload) => {
+        console.log(payload);
+
+        return {
+          url: `/user/update-status/${payload.id}`,
+          method: "PATCH",
+          data: payload,
+        };
+      },
+      invalidatesTags: [tagTypes.user],
+    }),
   }),
 });
 
-export const { useGetMyProfileQuery, useUpdateMyProfileMutation } = userApi;
+export const {
+  useGetMyProfileQuery,
+  useGetAlUserQuery,
+  useUpdateMyProfileMutation,
+  useChangeUserProfileStatusMutation,
+} = userApi;

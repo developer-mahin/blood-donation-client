@@ -21,7 +21,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { Dayjs } from "dayjs";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -33,7 +32,7 @@ type TProps = {
 const ProfileUpdateModal = ({ open, setOpen }: TProps) => {
   const { data, isLoading } = useGetMyProfileQuery({});
   const [updateMyProfile] = useUpdateMyProfileMutation();
-  const router = useRouter();
+
   const [dateValue, setDateValue] = useState<Dayjs | null>();
   const [available, setAvailable] = useState<string>("");
   const { register, handleSubmit } = useForm();
