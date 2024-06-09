@@ -1,3 +1,5 @@
+"use server"
+
 import assets from "@/assets/assets";
 import CustomDivider from "@/components/Shared/CustomDivider/CustomDivider";
 import { baseurl } from "@/constant/URL";
