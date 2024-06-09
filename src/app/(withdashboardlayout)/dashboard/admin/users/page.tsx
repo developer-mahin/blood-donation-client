@@ -25,10 +25,6 @@ const UsersPage = () => {
   const [changeUserProfileStatus] = useChangeUserProfileStatusMutation();
   const [changeUserRole] = useChangeUserRoleMutation();
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-
   const handleChangeStatus = async (id: string, status: string) => {
     const data = {
       id,
@@ -57,6 +53,10 @@ const UsersPage = () => {
     } catch (error) {}
   };
 
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <Box
       sx={{
@@ -84,9 +84,9 @@ const UsersPage = () => {
           </TableHead>
           <TableBody>
             {data?.result?.map((item: any) => (
-              <StyledTableRow key={item.id}>
+              <StyledTableRow key={item?.id}>
                 <StyledTableCell component="th" scope="row">
-                  {item?.name}
+                  {item?.name || ""}
                 </StyledTableCell>
                 <StyledTableCell>{item?.email}</StyledTableCell>
                 <StyledTableCell>
