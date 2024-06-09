@@ -1,8 +1,5 @@
-"use server"
-
 import assets from "@/assets/assets";
 import CustomDivider from "@/components/Shared/CustomDivider/CustomDivider";
-import { baseurl } from "@/constant/URL";
 import { authKey } from "@/constant/common";
 import { logoutUser } from "@/service/actions/logoutUser";
 import { TUser } from "@/types";
@@ -11,33 +8,22 @@ import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 
-type TDonorDetailsPageProps = { params: { id: string } };
-
-export const generateStaticParams = async ({
-  params,
-}: TDonorDetailsPageProps) => {
-  const res = await fetch(`${baseurl}/donor/donor-list?limit=10`);
-
-  const result = await res.json();
-  const data = result?.data;
-  return data?.map((donor: TUser) => ({ donorId: donor.id }));
-};
-
-const DonorDetailsPage = async ({ params }: TDonorDetailsPageProps) => {
+const DonorDetailsPage = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
   const token = cookies().get(authKey);
   if (!token?.value) {
-    // redirect("/login");
     return logoutUser();
   }
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/user/get-single-user/${id}`, {
-    headers: {
-      authorization: token.value as string,
-    },
-    
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/user/get-single-user/${id}`,
+    {
+      headers: {
+        authorization: token.value as string,
+      },
+    }
+  );
   const result = await res.json();
 
   const userData = result.data as TUser;
