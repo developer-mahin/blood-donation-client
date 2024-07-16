@@ -2,6 +2,7 @@ import assets from "@/assets/assets";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import SectionTitle from "../Shared/SectionTitle";
+import CContainer from "../Shared/Container";
 
 const AboutUsSection = () => {
   const mission = [
@@ -26,17 +27,17 @@ const AboutUsSection = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#D0D0D0",
+        background: "#F8F8F8",
         py: 10,
       }}
     >
-      <Container>
+      <CContainer>
         <Grid container justifyContent="space-between" alignItems="center">
           <Grid item md={6.5}>
             <Image src={assets.images.about} alt="" width={700} height={400} />
           </Grid>
           <Grid item md={5}>
-            <SectionTitle title="About Us"/>
+            <SectionTitle title="About Us" />
             <Typography
               variant="body1"
               color="textSecondary"
@@ -96,7 +97,7 @@ const AboutUsSection = () => {
             </Button>
           </Grid>
         </Grid>
-      </Container>
+      </CContainer>
     </Box>
   );
 };

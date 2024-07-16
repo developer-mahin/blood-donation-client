@@ -76,8 +76,6 @@ const UsersPage = () => {
               <StyledTableCell>Email</StyledTableCell>
               <StyledTableCell>Phone</StyledTableCell>
               <StyledTableCell>Blood type</StyledTableCell>
-              <StyledTableCell>Location</StyledTableCell>
-              <StyledTableCell>Role</StyledTableCell>
               <StyledTableCell>Status</StyledTableCell>
               <StyledTableCell>Action</StyledTableCell>
             </TableRow>
@@ -93,8 +91,6 @@ const UsersPage = () => {
                   {item?.userProfile?.contactNumber || "N/A"}
                 </StyledTableCell>
                 <StyledTableCell>{item?.bloodType}</StyledTableCell>
-                <StyledTableCell>{item?.location}</StyledTableCell>
-                <StyledTableCell>{item?.role}</StyledTableCell>
                 <StyledTableCell>{item?.status}</StyledTableCell>
                 <StyledTableCell>
                   <Box>
@@ -132,7 +128,7 @@ const UsersPage = () => {
                           size="small"
                           onClick={() => handleChangeStatus(item.id, "ACTIVE")}
                         >
-                          Active{" "}
+                          Active
                         </SmallButton>
                         <SmallButton
                           size="small"

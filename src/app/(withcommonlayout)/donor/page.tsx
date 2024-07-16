@@ -40,7 +40,7 @@ const DonorPage = async ({
   const data: TUser[] = result?.data || [];
   const meta: TMeta = result.meta;
 
-  const totalPage = Math.ceil(meta.total / meta.limit);
+  const totalPage = Math.ceil(meta?.total / meta?.limit);
 
   return (
     <Container

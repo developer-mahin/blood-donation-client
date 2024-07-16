@@ -44,7 +44,7 @@ const FilterDonor = () => {
     <Grid container spacing={3} sx={{ mt: ".3rem", mb: ".3rem" }}>
       <Grid item xs={6}>
         <TextField
-          fullWidth
+        
           label="Search"
           type="search"
           name="searchTerm"

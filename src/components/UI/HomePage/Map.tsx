@@ -1,28 +1,67 @@
-import { Box, Container } from "@mui/material";
+"use client";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import { Box, Typography } from "@mui/material";
+import { allCities } from "@/data/mapData";
 import SectionTitle from "../Shared/SectionTitle";
+import CContainer from "../Shared/Container";
+
+// Fixing the default icon issue in Leaflet
+//delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
+  iconUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+});
 
 const Map = () => {
   return (
-    <Container
+    <Box
       sx={{
-        py: 8,
+        height: "80vh",
+        width: "100%",
+        my: 5,
+        mb: {
+          xs: 10,
+          md: 6,
+        },
       }}
     >
-      <SectionTitle
-        title="Our Location"
-        des="Find us at our convenient and accessible locations, ready to serve you wherever you are."
-      />
-      <Box py={2} />
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14526.382409956588!2d89.87857535!3d24.46481195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fdf3006d5d4daf%3A0x3b13690d3bd54d54!2z4Kat4KeC4Kae4Ka-4Kaq4KeB4KawIOCmuOCmsOCmleCmvuCmsOCmvyDgprngpr7gprjgpqrgpr7gpqTgpr7gprI!5e0!3m2!1sen!2sbd!4v1717244598300!5m2!1sen!2sbd"
-        style={{
-          border: "0px",
-          width: "100%",
-          height: "480px",
+      <Box
+        sx={{
+          px: 2,
         }}
-        loading="lazy"
-      ></iframe>
-    </Container>
+      >
+        <SectionTitle
+          title="Our Service Area"
+          des="Connecting donors and recipients for lifesaving blood donations, Facilitating easy and efficient blood donations."
+        />
+      </Box>
+      <Box
+        sx={{
+          pb: 3,
+        }}
+      />
+      <MapContainer
+        center={[23.8103, 90.4125]}
+        zoom={7}
+        style={{ height: "100%", width: "100%" }}
+      >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        {allCities.map((loc, index) => (
+          <Marker key={index} position={[loc.latitude, loc.longitude]}>
+            <Popup>{loc.name}</Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+    </Box>
   );
 };
 

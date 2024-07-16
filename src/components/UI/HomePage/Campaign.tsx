@@ -3,6 +3,7 @@ import { Box, Container } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import SectionTitle from "../Shared/SectionTitle";
+import CContainer from "../Shared/Container";
 
 const itemData = [
   {
@@ -81,7 +82,7 @@ const Campaign = () => {
         background: "#F8F8F8",
       }}
     >
-      <Container>
+      <CContainer>
         <SectionTitle
           title="CAMPAIGN GALLERY"
           des="our prestigious voluntary work on campaigns by the team"
@@ -105,7 +106,7 @@ const Campaign = () => {
             </ImageListItem>
           ))}
         </ImageList>
-      </Container>
+      </CContainer>
     </Box>
   );
 };

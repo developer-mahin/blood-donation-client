@@ -5,7 +5,7 @@ import { removeCookies } from "./removeCookies";
 
 export const logoutUser = (router?: AppRouterInstance) => {
   removeUserInfo();
-  removeCookies([authKey, "accessToken"]);
+  removeCookies([authKey, "refreshToken"]);
   router?.push("/");
   router?.refresh();
 };

@@ -17,11 +17,16 @@ const Footer = () => {
         <Divider sx={{ mb: 3, border: "1px solid lightgray" }} />
         <Grid
           container
-          spacing={4}
-          justifyContent="space-between"
+          spacing={2}
           alignItems="center"
+          sx={{
+            justifyContent: {
+              xs: "center",
+              md: "space-between",
+            },
+          }}
         >
-          <Grid item>
+          <Grid item md={4}>
             <Box display="flex" alignItems="center">
               <Image
                 src={assets.images.logo}
@@ -39,7 +44,8 @@ const Footer = () => {
               </Typography>
             </Box>
           </Grid>
-          <Grid item>
+
+          <Grid item md={5}>
             <Grid container spacing={2}>
               {navItems.map((item: TNavItems, index: number) => (
                 <Grid item key={index}>
@@ -50,6 +56,7 @@ const Footer = () => {
               ))}
             </Grid>
           </Grid>
+
           <SocialPlatform />
         </Grid>
         <Typography

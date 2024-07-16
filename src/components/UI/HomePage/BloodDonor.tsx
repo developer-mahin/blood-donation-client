@@ -6,6 +6,7 @@ import generateDonorListApi from "@/utils/generateDonorListApi";
 import FilterDonor from "./FilterDonor";
 import SingleDonor from "./SingleDonor";
 import SectionTitle from "../Shared/SectionTitle";
+import CContainer from "../Shared/Container";
 
 const BloodDonor = async ({
   searchParams,
@@ -33,36 +34,38 @@ const BloodDonor = async ({
   const data: TUser[] = result?.data || [];
 
   return (
-    <Container
+    <Box
       sx={{
         py: 10,
       }}
     >
-      <SectionTitle
-        title=" Blood Donors"
-        des="our prestigious voluntary work on campaigns by the team"
-      />
-      <FilterDonor />
+      <CContainer>
+        <SectionTitle
+          title=" Blood Donors"
+          des="our prestigious voluntary work on campaigns by the team"
+        />
+        <FilterDonor />
 
-      <Grid container spacing={3} sx={{ mt: ".5rem" }}>
-        {!data.length ? (
-          <Typography variant="h5" sx={{ textAlign: "center", mt: "1rem" }}>
-            No data found
-          </Typography>
-        ) : (
-          data.slice(0, 8).map((donor) => (
-            <Grid item xs={12} md={6} lg={4} key={donor.id}>
-              <SingleDonor donor={donor} />
-            </Grid>
-          ))
-        )}
-      </Grid>
-      <Box sx={{ textAlign: "center", mt: "2rem" }}>
-        <Button component={Link} href="/donor">
-          View All
-        </Button>
-      </Box>
-    </Container>
+        <Grid container spacing={3} sx={{ mt: ".5rem" }}>
+          {!data.length ? (
+            <Typography variant="h5" sx={{ textAlign: "center", mt: "1rem" }}>
+              No data found
+            </Typography>
+          ) : (
+            data.slice(0, 8).map((donor) => (
+              <Grid item xs={12} md={6} lg={3} key={donor.id}>
+                <SingleDonor donor={donor} />
+              </Grid>
+            ))
+          )}
+        </Grid>
+        <Box sx={{ textAlign: "center", mt: "2rem" }}>
+          <Button component={Link} href="/donor">
+            View All
+          </Button>
+        </Box>
+      </CContainer>
+    </Box>
   );
 };
 
