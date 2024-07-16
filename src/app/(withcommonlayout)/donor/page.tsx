@@ -4,8 +4,9 @@ import SectionTitle from "@/components/UI/Shared/SectionTitle";
 import { baseurl } from "@/constant/URL";
 import { TMeta, TUser } from "@/types";
 import generateDonorListApi from "@/utils/generateDonorListApi";
-import { Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import PaginationController from "./components/PaginationController";
+import CContainer from "@/components/UI/Shared/Container";
 
 const DonorPage = async ({
   searchParams,
@@ -43,32 +44,34 @@ const DonorPage = async ({
   const totalPage = Math.ceil(meta?.total / meta?.limit);
 
   return (
-    <Container
+    <Box
       sx={{
         py: 10,
       }}
     >
-      <SectionTitle
-        title=" Blood Donors"
-        des="our prestigious voluntary work on campaigns by the team"
-      />
-      <FilterDonor />
+      <CContainer>
+        <SectionTitle
+          title=" Blood Donors"
+          des="our prestigious voluntary work on campaigns by the team"
+        />
+        <FilterDonor />
 
-      <Grid container spacing={3} sx={{ mt: ".5rem" }}>
-        {!data.length ? (
-          <Typography variant="h5" sx={{ textAlign: "center", mt: "1rem" }}>
-            No data found
-          </Typography>
-        ) : (
-          data.slice(0, 8).map((donor) => (
-            <Grid item xs={12} md={6} lg={4} key={donor.id}>
-              <SingleDonor donor={donor} />
-            </Grid>
-          ))
-        )}
-      </Grid>
-      <PaginationController totalPages={totalPage} currentPage={page} />
-    </Container>
+        <Grid container spacing={3} sx={{ mt: ".5rem" }}>
+          {!data.length ? (
+            <Typography variant="h5" sx={{ textAlign: "center", mt: "1rem" }}>
+              No data found
+            </Typography>
+          ) : (
+            data.slice(0, 8).map((donor) => (
+              <Grid item xs={12} md={6} lg={3} key={donor.id}>
+                <SingleDonor donor={donor} />
+              </Grid>
+            ))
+          )}
+        </Grid>
+        <PaginationController totalPages={totalPage} currentPage={page} />
+      </CContainer>
+    </Box>
   );
 };
 

@@ -1,5 +1,6 @@
 "use client";
 
+import CContainer from "@/components/UI/Shared/Container";
 import { TNavItems, navItems } from "@/data/navItems";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Container, Stack } from "@mui/material";
@@ -71,7 +72,7 @@ export default function Header(props: Props) {
           boxShadow: "2px 0px 5px 2px #ddd",
         }}
       >
-        <Container>
+        <CContainer>
           <Toolbar>
             <IconButton
               color="inherit"
@@ -105,7 +106,7 @@ export default function Header(props: Props) {
               </Stack>
             </Box>
           </Toolbar>
-        </Container>
+        </CContainer>
       </AppBar>
 
       <nav>

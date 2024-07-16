@@ -93,7 +93,7 @@ const AboutUsSection = () => {
               }}
               variant="outlined"
             >
-              Contact Us
+              <a href="#contact">Contact Us</a>
             </Button>
           </Grid>
         </Grid>

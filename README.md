@@ -25,8 +25,8 @@ Welcome to the Blood Donation website repository! This platform is designed to f
 
 ## Admin Credentials
 
-- email : mdmahin1310@gmail.com
-- password: 308244
+- email : mahenkhan83@gmail.com
+- password: 13104255
 
 ## Donor Credentials
 
