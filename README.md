@@ -17,7 +17,7 @@ Welcome to the Blood Donation website repository! This platform is designed to f
 
 ## Features
 
-- Authentication: Login , Registration and Change Password. 
+- Authentication: Login , Registration and Change Password.
 - Donor Profiles:There has search and sorting functionality and has pagination system
 - Blood Management: Send, Receive Blood Donation and get Data as a donor and requester
 - Profile Management: Update profile info and profile image, And they can see their blood request for Receive Blood or for donate blood. And they can change the donation status after changing status into approved they can see the requester contact information
@@ -30,5 +30,5 @@ Welcome to the Blood Donation website repository! This platform is designed to f
 
 ## Donor Credentials
 
-- email : johnydepp@gmail.com
-- password: 13104255
+- email : evelynadams@example.com
+- password: evelynpass654

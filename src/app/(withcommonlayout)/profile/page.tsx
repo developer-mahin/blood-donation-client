@@ -1,7 +1,7 @@
 "use client";
 
 import Spinner from "@/components/Shared/Spinner/Spinner";
-import useUserInfo from "@/constant/hook";
+import { useGetMyProfileQuery } from "@/redux/api/Features/user/userApi";
 import KeyIcon from "@mui/icons-material/Key";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Box, Button, Container } from "@mui/material";
@@ -12,7 +12,6 @@ import { useState } from "react";
 import Information from "./component/Information";
 import ProfileUpdateModal from "./component/ProfileUpdateModal";
 import Upload from "./component/Upload";
-import { useGetMyProfileQuery } from "@/redux/api/Features/user/userApi";
 
 const MyProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -30,7 +29,7 @@ const MyProfile = () => {
           <Grid xs={12} md={4}>
             <Box
               sx={{
-                height: 300,
+                height: 400,
                 width: "100%",
                 overflow: "hidden",
                 borderRadius: 1,

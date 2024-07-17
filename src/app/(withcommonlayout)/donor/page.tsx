@@ -1,12 +1,15 @@
 import FilterDonor from "@/components/UI/HomePage/FilterDonor";
 import SingleDonor from "@/components/UI/HomePage/SingleDonor";
+import CContainer from "@/components/UI/Shared/Container";
 import SectionTitle from "@/components/UI/Shared/SectionTitle";
 import { baseurl } from "@/constant/URL";
-import { TMeta, TUser } from "@/types";
+import { TAuthUser, TMeta, TUser } from "@/types";
 import generateDonorListApi from "@/utils/generateDonorListApi";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import PaginationController from "./components/PaginationController";
-import CContainer from "@/components/UI/Shared/Container";
+import { getUserInfo } from "@/service/auth.service";
+import { cookies } from "next/headers";
+import { decodedToken } from "@/utils/jwtDecode";
 
 const DonorPage = async ({
   searchParams,
@@ -20,9 +23,14 @@ const DonorPage = async ({
   };
 }) => {
   const page = searchParams?.page ? parseInt(searchParams.page, 10) : 1;
+  const token = cookies().get("accessToken")?.value;
+  let decoded: TAuthUser;
+  if (token) {
+    decoded = decodedToken(token) as TAuthUser;
+  }
 
   const URL = generateDonorListApi(
-    `${baseurl}/donor/donor-list?limit=6&page=${page}`,
+    `${baseurl}/donor/donor-list?limit=9&page=${page}`,
     {
       searchTerm: searchParams?.searchTerm,
       bloodType: searchParams?.bloodType,
@@ -39,12 +47,11 @@ const DonorPage = async ({
   });
 
   const result = await res.json();
-  const data: TUser[] = result?.data || [];
+  let data: TUser[] = result?.data || [];
+  data = data.filter((item) => item.id !== decoded?.userId);
   const meta: TMeta = result.meta;
 
   const totalPage = Math.ceil(meta?.total / meta?.limit);
-
-  // console.log(data);
 
   return (
     <Box
