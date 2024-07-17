@@ -52,7 +52,14 @@ const MyDonationRequest = () => {
         mt: 3,
       }}
     >
-      <SectionTitle title="My Request Me as a donor" />
+      <Typography
+        variant="h4"
+        component="h4"
+        fontWeight={600}
+        textTransform="capitalize"
+      >
+        My Donation
+      </Typography>
       <TableContainer
         component={Paper}
         sx={{

@@ -35,6 +35,7 @@ const DonorPage = async ({
     headers: {
       "Content-Type": "application/json",
     },
+    cache: "no-store",
   });
 
   const result = await res.json();
@@ -42,6 +43,8 @@ const DonorPage = async ({
   const meta: TMeta = result.meta;
 
   const totalPage = Math.ceil(meta?.total / meta?.limit);
+
+  // console.log(data);
 
   return (
     <Box

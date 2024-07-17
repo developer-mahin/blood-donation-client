@@ -2,6 +2,9 @@ import { Box, Stack, Typography } from "@mui/material";
 import { StyledInformationBox } from "./StyledInformationBox";
 
 const Information = ({ data }: any) => {
+  
+  console.log(data)
+  
   return (
     <>
       <Typography variant="h5" color="primary.main" mb={2}>

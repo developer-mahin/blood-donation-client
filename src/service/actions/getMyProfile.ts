@@ -13,6 +13,7 @@ export const getMyProfile = async () => {
   }
   const res = await fetch(`${baseurl}/user/my-profile`, {
     headers: headers,
+    cache: "no-store",
   });
   const data = await res.json();
 

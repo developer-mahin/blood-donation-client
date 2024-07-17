@@ -12,11 +12,13 @@ import { useState } from "react";
 import Information from "./component/Information";
 import ProfileUpdateModal from "./component/ProfileUpdateModal";
 import Upload from "./component/Upload";
+import { useGetMyProfileQuery } from "@/redux/api/Features/user/userApi";
 
 const MyProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const { userData, isLoading } = useUserInfo();
-  
+  // const { userData, isLoading } = useUserInfo();
+  const { data, isLoading } = useGetMyProfileQuery({});
+
   if (isLoading) {
     return <Spinner />;
   }
@@ -34,11 +36,11 @@ const MyProfile = () => {
                 borderRadius: 1,
               }}
             >
-              {userData?.userProfile?.photo && (
+              {data?.userProfile?.photo && (
                 <Image
                   height={300}
                   width={400}
-                  src={userData?.userProfile?.photo}
+                  src={data?.userProfile?.photo}
                   alt="Choose User Photo"
                 />
               )}
@@ -74,7 +76,7 @@ const MyProfile = () => {
             </Button>
           </Grid>
           <Grid xs={12} md={8}>
-            <Information data={userData} />
+            <Information data={data} />
           </Grid>
         </Grid>
       </Container>

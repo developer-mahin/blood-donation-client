@@ -18,7 +18,15 @@ export default function TableWrapper({ data }: any) {
         mt: 3,
       }}
     >
-      <SectionTitle title="My Request Me a requester" />
+      <Typography
+        variant="h4"
+        component="h4"
+        fontWeight={600}
+        textTransform="capitalize"
+      >
+        My Request
+      </Typography>
+
       <TableContainer
         component={Paper}
         sx={{

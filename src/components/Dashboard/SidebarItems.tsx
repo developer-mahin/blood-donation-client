@@ -31,6 +31,11 @@ export const adminSidebarItems: TSidebarItems[] = [
 
 export const donorSidebarItems: TSidebarItems[] = [
   {
+    name: "Profile",
+    path: "/profile",
+    icon: AccountBoxIcon,
+  },
+  {
     name: "My Donation",
     path: "/dashboard/donor/my_donation",
     icon: BiSolidDonateBlood,
