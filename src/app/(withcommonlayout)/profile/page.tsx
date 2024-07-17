@@ -1,7 +1,7 @@
 "use client";
 
 import Spinner from "@/components/Shared/Spinner/Spinner";
-import { useGetMyProfileQuery } from "@/redux/api/Features/user/userApi";
+import useUserInfo from "@/constant/hook";
 import KeyIcon from "@mui/icons-material/Key";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Box, Button, Container } from "@mui/material";
@@ -10,16 +10,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Information from "./component/Information";
-import MyBloodRequest from "./component/MyBloodRequest";
-import MyDonationRequest from "./component/MyDonationRequest";
 import ProfileUpdateModal from "./component/ProfileUpdateModal";
 import Upload from "./component/Upload";
 
 const MyProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const { data, isLoading } = useGetMyProfileQuery({});
-
+  const { userData, isLoading } = useUserInfo();
+  
   if (isLoading) {
     return <Spinner />;
   }
@@ -37,11 +34,11 @@ const MyProfile = () => {
                 borderRadius: 1,
               }}
             >
-              {data?.userProfile?.photo && (
+              {userData?.userProfile?.photo && (
                 <Image
                   height={300}
                   width={400}
-                  src={data?.userProfile?.photo}
+                  src={userData?.userProfile?.photo}
                   alt="Choose User Photo"
                 />
               )}
@@ -77,13 +74,9 @@ const MyProfile = () => {
             </Button>
           </Grid>
           <Grid xs={12} md={8}>
-            <Information data={data} />
+            <Information data={userData} />
           </Grid>
         </Grid>
-        <>
-          <MyBloodRequest />
-          <MyDonationRequest />
-        </>
       </Container>
     </>
   );

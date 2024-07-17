@@ -1,9 +1,9 @@
-import GroupIcon from "@mui/icons-material/Group";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import GroupIcon from "@mui/icons-material/Group";
 import KeyIcon from "@mui/icons-material/Key";
-import { MdBloodtype } from "react-icons/md";
+import { ElementType } from "react";
 import { BiSolidDonateBlood } from "react-icons/bi";
-import { ElementType, ReactNode } from "react";
+import { MdBloodtype } from "react-icons/md";
 
 export type TSidebarItems = {
   name: string;
@@ -37,7 +37,7 @@ export const donorSidebarItems: TSidebarItems[] = [
   },
   {
     name: "My Request",
-    path: "/dashboard/donor/my_donation",
+    path: "/dashboard/donor/my_request",
     icon: MdBloodtype,
   },
   {

@@ -3,7 +3,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { authKey, userRole } from "./constant/common";
 import { decodedToken } from "./utils/jwtDecode";
 
+type TRole = keyof typeof roleBasedPrivateRoutes;
+
 const authRoutes = ["/login", "/register"];
+const roleBasedPrivateRoutes = {
+  ADMIN: [/^\/dashboard\/admin/],
+  DONOR: [/^\/dashboard\/donor/],
+};
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
@@ -40,23 +46,11 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  console.log(role)
+  if (role && roleBasedPrivateRoutes[role as TRole]) {
+    const routes = roleBasedPrivateRoutes[role as TRole];
 
-  if (pathname === "/dashboard/admin/users") {
-    if (role === userRole.ADMIN) {
+    if (routes.some((route) => pathname.match(route))) {
       return NextResponse.next();
-    } else {
-      return NextResponse.redirect(new URL("/login", request.url));
-    }
-  }
-
-  console.log("=======================", pathname);
-
-  if (pathname === "/dashboard/user/my_donation") {
-    if (role === userRole.DONOR) {
-      return NextResponse.next();
-    } else {
-      return NextResponse.redirect(new URL("/login", request.url));
     }
   }
 

@@ -1,6 +1,4 @@
 import useUserInfo from "@/constant/hook";
-import { useGetMyProfileQuery } from "@/redux/api/Features/user/userApi";
-import { getMyProfile } from "@/service/actions/getMyProfile";
 import { logoutUser } from "@/service/actions/logoutUser";
 import { getUserInfo } from "@/service/auth.service";
 import Logout from "@mui/icons-material/Logout";
@@ -12,7 +10,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 const DropDownMenu = () => {
