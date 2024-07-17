@@ -40,8 +40,20 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  console.log(role)
+
   if (pathname === "/dashboard/admin/users") {
     if (role === userRole.ADMIN) {
+      return NextResponse.next();
+    } else {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
+
+  console.log("=======================", pathname);
+
+  if (pathname === "/dashboard/user/my_donation") {
+    if (role === userRole.DONOR) {
       return NextResponse.next();
     } else {
       return NextResponse.redirect(new URL("/login", request.url));

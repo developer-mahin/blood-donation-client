@@ -3,28 +3,44 @@ import { getUserInfo } from "@/service/auth.service";
 import {
   Box,
   Divider,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  MenuItem,
   Stack,
   Typography,
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import GroupIcon from "@mui/icons-material/Group";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import KeyIcon from "@mui/icons-material/Key";
 import { useEffect, useState } from "react";
+import {
+  adminSidebarItems,
+  donorSidebarItems,
+  TSidebarItems,
+} from "./SidebarItems";
+import SingleItem from "./SingleItem";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { logoutUser } from "@/service/actions/logoutUser";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const Sidebar = () => {
   const [userRole, setUserRole] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     const { role } = getUserInfo();
     setUserRole(role);
   }, []);
+
+  const handleLogOut = () => {
+    logoutUser(router);
+    router.refresh();
+    toast.success("log out successful");
+  };
 
   return (
     <Box>
@@ -53,30 +69,20 @@ const Sidebar = () => {
       </Stack>
       <Divider />
       <List>
-        <Link href="/profile">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{<AccountBoxIcon />}</ListItemIcon>
-              <ListItemText primary="Profile" />
-            </ListItemButton>
-          </ListItem>
-        </Link>
-        <Link href="/dashboard/admin/users">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{<GroupIcon />}</ListItemIcon>
-              <ListItemText primary="Users" />
-            </ListItemButton>
-          </ListItem>
-        </Link>
-        <Link href="/change_password">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{<KeyIcon />}</ListItemIcon>
-              <ListItemText primary="Change Password" />
-            </ListItemButton>
-          </ListItem>
-        </Link>
+        {userRole === "admin"
+          ? adminSidebarItems.map((item: TSidebarItems, i: number) => (
+              <SingleItem key={i} item={item} />
+            ))
+          : donorSidebarItems.map((item: TSidebarItems, i: number) => (
+              <SingleItem key={i} item={item} />
+            ))}
+
+        <ListItem disablePadding onClick={() => handleLogOut()}>
+          <ListItemButton>
+            <ListItemIcon>{<LogoutIcon />}</ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );

@@ -16,7 +16,6 @@ export const userApi = baseApi.injectEndpoints({
         url: "/user/my-profile",
         method: "GET",
       }),
-      providesTags: [tagTypes.user],
     }),
 
     updateMyProfile: build.mutation({
@@ -32,8 +31,6 @@ export const userApi = baseApi.injectEndpoints({
 
     changeUserProfileStatus: build.mutation({
       query: (payload) => {
-        console.log(payload);
-
         return {
           url: `/user/update-status/${payload.id}`,
           method: "PATCH",
