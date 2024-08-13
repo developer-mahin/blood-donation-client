@@ -2,18 +2,20 @@ import assets from "@/assets/assets";
 import { Box, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import LoginForm from "./component/LoginForm";
+import LoginCredantial from "@/components/UI/Shared/LoginCredantial";
 
 const LoginPage = () => {
   return (
     <Box
       sx={{
         my: 4,
+        mx: 1,
       }}
     >
       <Container
         maxWidth="xs"
         sx={{
-          padding: "50px",
+          padding: "20px",
           boxShadow: 1,
           borderRadius: "10px",
         }}
@@ -30,6 +32,7 @@ const LoginPage = () => {
           </Typography>
         </Stack>
         <LoginForm />
+        <LoginCredantial />
       </Container>
     </Box>
   );

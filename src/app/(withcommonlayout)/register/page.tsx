@@ -2,6 +2,7 @@ import assets from "@/assets/assets";
 import { Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import RegisterForm from "./component/RegisterForm";
+import LoginCredantial from "@/components/UI/Shared/LoginCredantial";
 
 const RegisterPages = () => {
   return (
@@ -10,12 +11,13 @@ const RegisterPages = () => {
       alignItems="center"
       sx={{
         my: 4,
+        mx: 1,
       }}
     >
       <Container
         maxWidth="sm"
         sx={{
-          padding: "50px",
+          padding: "20px",
           boxShadow: 2,
           borderRadius: "10px",
         }}
@@ -32,6 +34,7 @@ const RegisterPages = () => {
           </Typography>
         </Stack>
         <RegisterForm />
+        <LoginCredantial />
       </Container>
     </Stack>
   );

@@ -1,4 +1,4 @@
-import { TUser } from "@/types";
+import { TAuthUser, TUser } from "@/types";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import { baseurl } from "@/constant/URL";
@@ -7,6 +7,8 @@ import FilterDonor from "./FilterDonor";
 import SingleDonor from "./SingleDonor";
 import SectionTitle from "../Shared/SectionTitle";
 import CContainer from "../Shared/Container";
+import { cookies } from "next/headers";
+import { decodedToken } from "@/utils/jwtDecode";
 
 const BloodDonor = async ({
   searchParams,
@@ -17,7 +19,13 @@ const BloodDonor = async ({
     availability?: string;
   };
 }) => {
-  const URL = generateDonorListApi(`${baseurl}/donor/donor-list?limit=6`, {
+  const token = cookies().get("accessToken")?.value;
+  let decoded: TAuthUser;
+  if (token) {
+    decoded = decodedToken(token) as TAuthUser;
+  }
+
+  const URL = generateDonorListApi(`${baseurl}/donor/donor-list?limit=9`, {
     searchTerm: searchParams?.searchTerm,
     bloodType: searchParams?.bloodType,
     availability: searchParams?.availability,
@@ -28,12 +36,12 @@ const BloodDonor = async ({
     headers: {
       "Content-Type": "application/json",
     },
+    cache: "no-store",
   });
 
   const result = await res.json();
-  const data: TUser[] = result?.data || [];
-
-
+  let data: TUser[] = result?.data || [];
+  data = data.filter((item) => item.id !== decoded?.userId);
 
   return (
     <Box

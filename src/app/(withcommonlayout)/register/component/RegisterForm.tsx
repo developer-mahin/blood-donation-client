@@ -57,7 +57,7 @@ const RegisterForm = () => {
         {registerData?.map((data: TRegister, i: number) => (
           <React.Fragment key={i}>
             {!data.isSelect ? (
-              <Grid item md={data.column}>
+              <Grid item md={data.column} xs={12}>
                 <BInput
                   label={data.label}
                   type={data.type}
@@ -67,7 +67,7 @@ const RegisterForm = () => {
                 />
               </Grid>
             ) : (
-              <Grid item md={data.column}>
+              <Grid item md={data.column} xs={12}>
                 <BSelect
                   label={data.label}
                   name={data.name}
