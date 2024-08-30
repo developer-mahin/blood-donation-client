@@ -1,8 +1,8 @@
 import assets from "@/assets/assets";
 import CustomDivider from "@/components/Shared/CustomDivider/CustomDivider";
 import { authKey } from "@/constant/common";
-import { logoutUser } from "@/service/actions/logoutUser";
 import { TUser } from "@/types";
+import RedirectInLoginPage from "@/utils/RedirectInLoginPage";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { cookies } from "next/headers";
 import Image from "next/image";
@@ -13,7 +13,7 @@ const DonorDetailsPage = async ({ params }: { params: { id: string } }) => {
 
   const token = cookies().get(authKey);
   if (!token?.value) {
-    return logoutUser();
+    return <RedirectInLoginPage redirect="/login" />;
   }
 
   const res = await fetch(

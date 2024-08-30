@@ -19,6 +19,8 @@ export function middleware(request: NextRequest) {
   if (!accessToken) {
     if (authRoutes.includes(pathname)) {
       return NextResponse.next();
+    } else if (pathname.startsWith("/donor/")) {
+      return NextResponse.redirect(new URL("/login", request.url));
     } else {
       return NextResponse.redirect(new URL("/login", request.url));
     }
@@ -27,6 +29,7 @@ export function middleware(request: NextRequest) {
   if (pathname === "/donor") {
     return NextResponse.next();
   }
+
 
   let decodedData = null;
 

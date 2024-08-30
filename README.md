@@ -1,6 +1,6 @@
 # Blood Donation System
 
-Welcome to the Blood Donation website repository! This platform is designed to facilitate blood donations by connecting donors with recipients. Below you will find detailed information on the features, installation process, and how to contribute to the project.
+The Blood Donation website is a user-centric platform designed to facilitate the blood donation process by connecting donors with recipients. The website offers comprehensive features that allow users to search for donors based on specific criteria, manage their profiles, and for administrators to oversee site activities and user accounts. The primary goal is to streamline the process of finding and donating blood, making it secure, efficient, and user-friendly.
 
 ## Technology Stack:
 
@@ -10,6 +10,10 @@ Welcome to the Blood Donation website repository! This platform is designed to f
 - React Hook Form
 - Redux Toolkit
 - Axios
+- Node.js
+- Express.js
+- PostgreSQL
+- Prisma
 
 #### SERVER_URL : https://blooddonationserverv2.vercel.app/
 
