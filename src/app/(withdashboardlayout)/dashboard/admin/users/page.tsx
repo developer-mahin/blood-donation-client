@@ -1,61 +1,49 @@
 "use client";
 
-import {
-  SmallButton,
-  StyledTableCell,
-  StyledTableRow,
-} from "@/app/(withcommonlayout)/profile/component/StyledInformationBox";
+import { StyledTableCell } from "@/app/(withcommonlayout)/profile/component/StyledInformationBox";
 import Spinner from "@/components/Shared/Spinner/Spinner";
-import {
-  useChangeUserProfileStatusMutation,
-  useChangeUserRoleMutation,
-  useGetAlUserQuery,
-} from "@/redux/api/Features/user/userApi";
-import { Box } from "@mui/material";
+import { useGetAlUserQuery } from "@/redux/api/Features/user/userApi";
+import { Box, Pagination, Stack } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { toast } from "sonner";
+import { useState } from "react";
+import TableContent from "./components/TableContent";
 
 const UsersPage = () => {
-  const { data, isLoading } = useGetAlUserQuery({});
-  const [changeUserProfileStatus] = useChangeUserProfileStatusMutation();
-  const [changeUserRole] = useChangeUserRoleMutation();
+  const [page, setPage] = useState<number>(1);
 
-  const handleChangeStatus = async (id: string, status: string) => {
-    const data = {
-      id,
-      status,
-    };
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(8);
 
-    try {
-      const res = await changeUserProfileStatus(data);
-      if (res.data) {
-        toast.success("successfully update the status");
-      }
-    } catch (error) {}
-  };
-
-  const handleChangeRole = async (id: string, role: { role: string }) => {
-    const data = {
-      id,
-      role: role.role,
-    };
-
-    try {
-      const res = await changeUserRole(data);
-      if (res.data) {
-        toast.success("successfully update the role");
-      }
-    } catch (error) {}
-  };
+  const { data, isLoading } = useGetAlUserQuery([
+    {
+      name: "limit",
+      value: limit,
+    },
+    {
+      name: "page",
+      value: currentPage,
+    },
+    {
+      name: "searchTerm",
+      value: searchTerm,
+    },
+  ]);
 
   if (isLoading) {
     return <Spinner />;
   }
+
+  const totalPage = Math.ceil(data?.meta?.total / data?.meta?.limit);
+
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setCurrentPage(value);
+  };
 
   return (
     <Box
@@ -63,6 +51,8 @@ const UsersPage = () => {
         mt: 3,
       }}
     >
+
+      
       <TableContainer
         component={Paper}
         sx={{
@@ -82,55 +72,19 @@ const UsersPage = () => {
           </TableHead>
           <TableBody>
             {data?.result?.map((item: any) => {
-              return (
-                <StyledTableRow key={item?.id}>
-                  <StyledTableCell component="th" scope="row">
-                    {item?.name || ""}
-                  </StyledTableCell>
-                  <StyledTableCell>{item?.email}</StyledTableCell>
-                  <StyledTableCell>
-                    {item?.userProfile?.contactNumber || "N/A"}
-                  </StyledTableCell>
-                  <StyledTableCell>{item?.bloodType}</StyledTableCell>
-                  <StyledTableCell>{item?.status}</StyledTableCell>
-                  <StyledTableCell>
-                    <Box>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        <SmallButton
-                          size="small"
-                          onClick={() =>
-                            handleChangeRole(item.id, {
-                              role: item.role === "DONOR" ? "ADMIN" : "DONOR",
-                            })
-                          }
-                        >
-                          {item.role}
-                        </SmallButton>
-                        <SmallButton
-                          size="small"
-                          onClick={() =>
-                            handleChangeStatus(
-                              item.id,
-                              item.status === "ACTIVE" ? "DEACTIVE" : "ACTIVE"
-                            )
-                          }
-                        >
-                          {item.status}
-                        </SmallButton>
-                      </Box>
-                    </Box>
-                  </StyledTableCell>
-                </StyledTableRow>
-              );
+              return <TableContent item={item} key={item._id} />;
             })}
           </TableBody>
         </Table>
       </TableContainer>
+
+      <Stack spacing={2} mt={4}>
+        <Pagination
+          count={totalPage}
+          page={currentPage}
+          onChange={handleChange}
+        />
+      </Stack>
     </Box>
   );
 };

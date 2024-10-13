@@ -11,7 +11,6 @@ import * as React from "react";
 import DashboardAppBar from "./Appbar";
 import Sidebar from "./Sidebar";
 
-
 const drawerWidth = 240;
 
 export default function DashboardDrawer({
@@ -108,12 +107,19 @@ export default function DashboardDrawer({
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
         <Toolbar />
-        <Box>{children}</Box>
+        <Box
+          sx={{
+            p: 3,
+            background: "#EFF1F3",
+          }}
+        >
+          {children}
+        </Box>
       </Box>
     </Box>
   );

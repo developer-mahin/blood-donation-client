@@ -4,6 +4,7 @@ import KeyIcon from "@mui/icons-material/Key";
 import { ElementType } from "react";
 import { BiSolidDonateBlood } from "react-icons/bi";
 import { MdBloodtype } from "react-icons/md";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 export type TSidebarItems = {
   name: string;
@@ -13,9 +14,9 @@ export type TSidebarItems = {
 
 export const adminSidebarItems: TSidebarItems[] = [
   {
-    name: "Profile",
-    path: "/profile",
-    icon: AccountBoxIcon,
+    name: "Dashboard",
+    path: "/dashboard/admin/admin_dashboard",
+    icon: DashboardIcon,
   },
   {
     name: "Users",

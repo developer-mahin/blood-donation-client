@@ -68,3 +68,8 @@ export type TUser = {
   updatedAt: string;
   userProfile: TUserProfile;
 };
+
+export type TQueryParams = {
+  name: string;
+  value: boolean | React.Key;
+};

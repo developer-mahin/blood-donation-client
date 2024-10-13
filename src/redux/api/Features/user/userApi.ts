@@ -1,11 +1,29 @@
+import { TQueryParams } from "@/types";
 import { baseApi } from "../../baseApi";
 import { tagTypes } from "../../tagTypes";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getAlUser: build.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+
+        args?.forEach((item: TQueryParams) => {
+          params.append(item.name, item.value as string);
+        });
+
+        return {
+          url: "/user/get-all-user",
+          method: "GET",
+          params: params,
+        };
+      },
+      providesTags: [tagTypes.user],
+    }),
+
+    getAllDonor: build.query({
       query: () => ({
-        url: "/user/get-all-user",
+        url: "/donor/donor-list",
         method: "GET",
       }),
       providesTags: [tagTypes.user],
@@ -60,4 +78,5 @@ export const {
   useUpdateMyProfileMutation,
   useChangeUserProfileStatusMutation,
   useChangeUserRoleMutation,
+  useGetAllDonorQuery,
 } = userApi;

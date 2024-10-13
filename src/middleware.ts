@@ -24,7 +24,6 @@ export function middleware(request: NextRequest) {
     }
   }
 
-
   let decodedData = null;
 
   if (accessToken) {
@@ -56,11 +55,5 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: [
-    "/dashboard/:page*",
-    "/login",
-    "/register",
-    "/profile",
-    // "/donor/:id",
-  ],
+  matcher: ["/dashboard/:page*", "/login", "/register", "/profile"],
 };

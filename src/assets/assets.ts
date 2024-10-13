@@ -2,6 +2,7 @@ const assets = {
   images: {
     logo: require("./logo.jpg"),
     new_logo: require("./new_logo.png"),
+    welcome: require("./welcome-back-3.png"),
     bannerImage: require("./bannerImage.png"),
     about: require("./about.png"),
   },

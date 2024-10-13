@@ -35,7 +35,7 @@ const DropDownMenu = () => {
 
   const routes =
     user.role === "admin"
-      ? "/dashboard/admin/users"
+      ? "/dashboard/admin/admin_dashboard"
       : "/dashboard/donor/my_donation";
 
   if (isLoading) {
