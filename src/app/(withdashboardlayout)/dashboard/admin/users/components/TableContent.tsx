@@ -3,7 +3,10 @@ import {
   StyledTableCell,
   StyledTableRow,
 } from "@/app/(withcommonlayout)/profile/component/StyledInformationBox";
-import { useChangeUserProfileStatusMutation, useChangeUserRoleMutation } from "@/redux/api/Features/user/userApi";
+import {
+  useChangeUserProfileStatusMutation,
+  useChangeUserRoleMutation,
+} from "@/redux/api/Features/user/userApi";
 import { Box } from "@mui/material";
 import { toast } from "sonner";
 

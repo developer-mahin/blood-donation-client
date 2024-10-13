@@ -1,18 +1,17 @@
 "use client";
 
 import assets from "@/assets/assets";
+import GaugeChart from "@/components/Charts/GaugeChart";
 import {
   useGetAllDonorQuery,
   useGetAlUserQuery,
   useGetMyProfileQuery,
 } from "@/redux/api/Features/user/userApi";
 import Image from "next/image";
-import { Gauge, gaugeClasses } from "@mui/x-charts/Gauge";
-import GaugeChart from "@/components/Charts/GaugeChart";
 
 const ProfileInfo = () => {
   const { data: profile } = useGetMyProfileQuery({});
-  const { data: allUser } = useGetAlUserQuery({});
+  const { data: allUser } = useGetAlUserQuery([]);
   const { data: allDonor } = useGetAllDonorQuery({});
 
   const allUserChatSettings = {

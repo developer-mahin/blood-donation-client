@@ -3,7 +3,14 @@
 import { StyledTableCell } from "@/app/(withcommonlayout)/profile/component/StyledInformationBox";
 import Spinner from "@/components/Shared/Spinner/Spinner";
 import { useGetAlUserQuery } from "@/redux/api/Features/user/userApi";
-import { Box, Pagination, Stack } from "@mui/material";
+import {
+  Box,
+  Input,
+  Pagination,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -14,8 +21,6 @@ import { useState } from "react";
 import TableContent from "./components/TableContent";
 
 const UsersPage = () => {
-  const [page, setPage] = useState<number>(1);
-
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(8);
@@ -51,8 +56,26 @@ const UsersPage = () => {
         mt: 3,
       }}
     >
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography className="w-fit" fontWeight={600} variant="h5">
+          All Users
+        </Typography>
+        <TextField
+          variant="outlined"
+          size="small"
+          type="text"
+          placeholder="Search"
+          label="Search User"
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </Box>
 
-      
       <TableContainer
         component={Paper}
         sx={{
