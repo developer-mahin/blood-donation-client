@@ -1,8 +1,18 @@
-import { TNavItems, navItems } from "@/data/navItems";
-import { Box, Container, Divider, Grid, Link, Typography } from "@mui/material";
-import Image from "next/image";
-import SocialPlatform from "../SocialPlatform/SocialPlatform";
+import {
+  Container,
+  Grid,
+  Box,
+  Typography,
+  IconButton,
+  Divider,
+} from "@mui/material";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
 import assets from "@/assets/assets";
+import Image from "next/image";
+import Link from "next/link";
+import CContainer from "@/components/UI/Shared/Container";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -10,64 +20,127 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        py: 8,
+        backgroundColor: "#D7212C",
+        py: 10,
+        px: 4,
+        borderTop: "1px solid",
+        borderColor: "grey.200",
+        mt: 10,
       }}
     >
-      <Container>
-        <Divider sx={{ mb: 3, border: "1px solid lightgray" }} />
-        <Grid
-          container
-          spacing={2}
-          alignItems="center"
-          sx={{
-            justifyContent: {
-              xs: "center",
-              md: "space-between",
-            },
-          }}
-        >
-          <Grid item md={4}>
-            <Box display="flex" alignItems="center">
+      <CContainer>
+        <Grid container justifyContent="space-between" spacing={8}>
+          <Grid item xs={12} lg={4}>
+            <Link href="/" className="">
               <Image
-                src={assets.images.logo}
-                width={120}
-                height={80}
-                alt="Ghuri Foundation"
+                alt=""
+                src={assets.images.new_logo}
+                width={600}
+                height={100}
+                className="w-[250px] h-[100px]"
               />
-              <Typography
-                variant="h6"
-                color="#3E3E3E"
-                component="h6"
-                fontWeight={600}
-              >
-                Ghuri Foundation
-              </Typography>
-            </Box>
+            </Link>
           </Grid>
 
-          <Grid item md={5}>
-            <Grid container spacing={2}>
-              {navItems.map((item: TNavItems, index: number) => (
-                <Grid item key={index}>
-                  <Link href={item.path} variant="body2" color="textSecondary">
-                    {item.title}
-                  </Link>
-                </Grid>
-              ))}
+          <Grid item xs={12} lg={8} color="#fff">
+            <Grid container spacing={3}>
+              <Grid item xs={6} sm={3}>
+                <Typography variant="subtitle1" fontWeight="bold">
+                  Product
+                </Typography>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                  <li>
+                    <Link href="/" style={{ color: "#fff" }}>
+                      Features
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/" style={{ color: "#fff" }}>
+                      Integrations
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/" style={{ color: "#fff" }}>
+                      Pricing
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/" style={{ color: "#fff" }}>
+                      FAQ
+                    </Link>
+                  </li>
+                </ul>
+              </Grid>
+              <Grid item xs={6} sm={3}>
+                <Typography variant="subtitle1" fontWeight="bold">
+                  Company
+                </Typography>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                  <li>
+                    <Link href="/" style={{ color: "#fff" }}>
+                      Privacy
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/" style={{ color: "#fff" }}>
+                      Terms of Service
+                    </Link>
+                  </li>
+                </ul>
+              </Grid>
+              <Grid item xs={6} sm={3}>
+                <Typography variant="subtitle1" fontWeight="bold">
+                  Developers
+                </Typography>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                  <li>
+                    <Link href="/" style={{ color: "#fff" }}>
+                      Public API
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/" style={{ color: "#fff" }}>
+                      Documentation
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/" style={{ color: "#fff" }}>
+                      Guides
+                    </Link>
+                  </li>
+                </ul>
+              </Grid>
+              <Grid item xs={6} sm={3}>
+                <Typography variant="subtitle1" fontWeight="bold">
+                  Social media
+                </Typography>
+                <Box display="flex" mt={1}>
+                  <IconButton href="#" title="Facebook">
+                    <FacebookIcon className="text-white" />
+                  </IconButton>
+                  <IconButton href="#" title="Twitter">
+                    <TwitterIcon className="text-white" />
+                  </IconButton>
+                  <IconButton href="#" title="Instagram">
+                    <InstagramIcon className="text-white" />
+                  </IconButton>
+                </Box>
+              </Grid>
             </Grid>
           </Grid>
-
-          <SocialPlatform />
         </Grid>
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          align="center"
-          sx={{ mt: 2 }}
-        >
-          © {year} Ghuri Foundation. All rights reserved.
+      </CContainer>
+      <Box
+        sx={{
+          my: 3,
+        }}
+      />
+      <Divider />
+      <Box textAlign="center" mt={6}>
+        <Typography variant="body2" color="#fff">
+          © {year} Company Co. All rights reserved.
         </Typography>
-      </Container>
+      </Box>
     </Box>
   );
 };

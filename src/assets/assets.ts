@@ -1,6 +1,7 @@
 const assets = {
   images: {
     logo: require("./logo.jpg"),
+    new_logo: require("./new_logo.png"),
     bannerImage: require("./bannerImage.png"),
     about: require("./about.png"),
   },

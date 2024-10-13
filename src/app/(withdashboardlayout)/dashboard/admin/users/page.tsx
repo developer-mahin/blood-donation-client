@@ -39,10 +39,10 @@ const UsersPage = () => {
     } catch (error) {}
   };
 
-  const handleChangeRole = async (id: string, role: string) => {
+  const handleChangeRole = async (id: string, role: { role: string }) => {
     const data = {
       id,
-      role,
+      role: role.role,
     };
 
     try {
@@ -81,69 +81,53 @@ const UsersPage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data?.result?.map((item: any) => (
-              <StyledTableRow key={item?.id}>
-                <StyledTableCell component="th" scope="row">
-                  {item?.name || ""}
-                </StyledTableCell>
-                <StyledTableCell>{item?.email}</StyledTableCell>
-                <StyledTableCell>
-                  {item?.userProfile?.contactNumber || "N/A"}
-                </StyledTableCell>
-                <StyledTableCell>{item?.bloodType}</StyledTableCell>
-                <StyledTableCell>{item?.status}</StyledTableCell>
-                <StyledTableCell>
-                  <Box>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Box>
+            {data?.result?.map((item: any) => {
+              return (
+                <StyledTableRow key={item?.id}>
+                  <StyledTableCell component="th" scope="row">
+                    {item?.name || ""}
+                  </StyledTableCell>
+                  <StyledTableCell>{item?.email}</StyledTableCell>
+                  <StyledTableCell>
+                    {item?.userProfile?.contactNumber || "N/A"}
+                  </StyledTableCell>
+                  <StyledTableCell>{item?.bloodType}</StyledTableCell>
+                  <StyledTableCell>{item?.status}</StyledTableCell>
+                  <StyledTableCell>
+                    <Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
                         <SmallButton
                           size="small"
-                          onClick={() => handleChangeRole(item.id, "ADMIN")}
+                          onClick={() =>
+                            handleChangeRole(item.id, {
+                              role: item.role === "DONOR" ? "ADMIN" : "DONOR",
+                            })
+                          }
                         >
-                          Admin
-                        </SmallButton>
-                        <SmallButton
-                          size="small"
-                          onClick={() => handleChangeRole(item.id, "DONOR")}
-                        >
-                          Donor
-                        </SmallButton>
-                      </Box>
-                    </Box>
-
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        mt: 2,
-                      }}
-                    >
-                      <Box>
-                        <SmallButton
-                          size="small"
-                          onClick={() => handleChangeStatus(item.id, "ACTIVE")}
-                        >
-                          Active
+                          {item.role}
                         </SmallButton>
                         <SmallButton
                           size="small"
                           onClick={() =>
-                            handleChangeStatus(item.id, "DEACTIVE")
+                            handleChangeStatus(
+                              item.id,
+                              item.status === "ACTIVE" ? "DEACTIVE" : "ACTIVE"
+                            )
                           }
                         >
-                          Deactivate
+                          {item.status}
                         </SmallButton>
                       </Box>
                     </Box>
-                  </Box>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
+                  </StyledTableCell>
+                </StyledTableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>

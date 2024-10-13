@@ -1,22 +1,20 @@
 "use client";
 
-import * as React from "react";
-import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
 import { Box, Divider } from "@mui/material";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import * as React from "react";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
     width: "600px",
-    
   },
   "& .MuiDialogActions-root": {
     padding: theme.spacing(1),
@@ -39,14 +37,7 @@ const LoginCredantial = () => {
         mt: 2,
       }}
     >
-      <Button
-        variant="contained"
-        sx={{
-          textTransform: "capitalize",
-        }}
-        fullWidth
-        onClick={handleClickOpen}
-      >
+      <Button variant="contained" fullWidth onClick={handleClickOpen}>
         Show Demo Credentials
       </Button>
       <BootstrapDialog

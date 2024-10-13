@@ -1,22 +1,23 @@
 import assets from "@/assets/assets";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import LoginForm from "./component/LoginForm";
-import LoginCredantial from "@/components/UI/Shared/LoginCredantial";
+import RegisterForm from "./component/RegisterForm";
 
-const LoginPage = () => {
+const RegisterPages = () => {
   return (
-    <Box
+    <Stack
+      justifyContent="center"
+      alignItems="center"
       sx={{
         my: 4,
         mx: 1,
       }}
     >
       <Container
-        maxWidth="xs"
+        maxWidth="sm"
         sx={{
           padding: "20px",
-          boxShadow: 1,
+          boxShadow: 2,
           borderRadius: "10px",
         }}
       >
@@ -28,14 +29,14 @@ const LoginPage = () => {
         >
           <Image src={assets.images.logo} alt="" width={150} height={100} />
           <Typography variant="h5" component="h5" mt={1} fontWeight={600}>
-            Login With Ghuri Foundation
+            Registration with Ghuri Foundation
           </Typography>
         </Stack>
-        <LoginForm />
-        <LoginCredantial />
+        <RegisterForm />
+   
       </Container>
-    </Box>
+    </Stack>
   );
 };
 
-export default LoginPage;
+export default RegisterPages;

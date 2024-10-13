@@ -1,9 +1,10 @@
 "use client";
 
+import assets from "@/assets/assets";
 import CContainer from "@/components/UI/Shared/Container";
 import { TNavItems, navItems } from "@/data/navItems";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Container, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -17,6 +18,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 
@@ -41,21 +43,40 @@ export default function Header(props: Props) {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        Ghuri Foundation
-      </Typography>
-      <Divider />
-      <List>
-        {navItems.map((item: TNavItems, i: number) => (
-          <ListItem component={Link} href={item.path} key={i} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item.title} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
+    <>
+      <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+        <Box
+          sx={{
+            background: "#721F2B",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Image
+            alt=""
+            src={assets.images.new_logo}
+            width={500}
+            height={80}
+            className="h-[70px] w-[150px] py-2"
+          />
+        </Box>
+        <Divider />
+        <List>
+          {navItems.map((item: TNavItems, i: number) => (
+            <ListItem component={Link} href={item.path} key={i} disablePadding>
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <div className="flex justify-center">
+          <AuthButton />
+        </div>
+      </Box>
+    </>
   );
 
   const container =
@@ -67,9 +88,10 @@ export default function Header(props: Props) {
 
       <AppBar
         component="nav"
-        color="info"
         sx={{
           boxShadow: "2px 0px 5px 2px #ddd",
+          background: "primary",
+          padding: "5px 0px",
         }}
       >
         <CContainer>
@@ -83,21 +105,24 @@ export default function Header(props: Props) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
-              variant="h6"
+            <Box
               component={Link}
               href="/"
-              fontWeight={600}
-              color="secondary.main"
               sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
             >
-              Ghuri Foundation
-            </Typography>
+              <Image
+                alt=""
+                src={assets.images.new_logo}
+                width={500}
+                height={80}
+                className="h-[60px] w-[100px]"
+              />
+            </Box>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               <Stack direction="row" gap={3} alignItems="center">
                 {navItems.map((item: TNavItems, i: number) => (
                   <Link href={item.path} key={i}>
-                    <Typography fontWeight={600} color="secondary.main">
+                    <Typography fontWeight={600} color="#f3f3f3">
                       {item.title}
                     </Typography>
                   </Link>

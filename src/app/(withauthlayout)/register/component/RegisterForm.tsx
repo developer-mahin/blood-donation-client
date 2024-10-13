@@ -4,6 +4,7 @@ import BForm from "@/components/Form/BForm";
 import BInput from "@/components/Form/BInput";
 import BSelect from "@/components/Form/BSelect";
 import SocialPlatform from "@/components/Shared/SocialPlatform/SocialPlatform";
+import LoginCredantial from "@/components/UI/Shared/LoginCredantial";
 import { TRegister, registerData } from "@/data/registerData";
 import { loginUser } from "@/service/actions/loginUser";
 import { registerUser } from "@/service/actions/registerUser";
@@ -88,8 +89,7 @@ const RegisterForm = () => {
       >
         Register
       </Button>
-
-      <SocialPlatform title="Registration with Social Platform" />
+      <LoginCredantial />
 
       <Typography
         sx={{

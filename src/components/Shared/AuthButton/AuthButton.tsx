@@ -13,9 +13,9 @@ const AuthButton = () => {
           <DropDownMenu />
         ) : (
           <Link href="/login">
-            <Typography fontWeight={600} color="secondary.main">
+            <p className="lg:text-[#f4f4f4] text-black lg:font-semibold ">
               Login
-            </Typography>
+            </p>
           </Link>
         )}
       </Stack>

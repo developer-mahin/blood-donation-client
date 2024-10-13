@@ -9,11 +9,18 @@ const SectionTitle = ({ title, des }: { title: string; des?: string }) => {
         component="h4"
         fontWeight={600}
         textTransform="uppercase"
+        color="primary"
       >
         {title}
       </Typography>
       {des && (
-        <Typography textAlign="center" paragraph fontSize="18px">
+        <Typography
+          textAlign="center"
+          textTransform="capitalize"
+          color="primary"
+          paragraph
+          fontSize="18px"
+        >
           {des}
         </Typography>
       )}

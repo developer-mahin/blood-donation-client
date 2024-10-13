@@ -59,12 +59,14 @@ const HeroSection = () => {
             </Stack>
           </Grid>
           <Grid md={7}>
-            <Image
-              src={assets.images.bannerImage}
-              alt=""
-              width={700}
-              height={400}
-            />
+            <div className="flex justify-end">
+              <Image
+                src={assets.images.bannerImage}
+                alt=""
+                width={700}
+                height={400}
+              />
+            </div>
           </Grid>
         </Grid>
       </CContainer>

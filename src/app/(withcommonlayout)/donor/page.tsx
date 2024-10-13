@@ -5,11 +5,10 @@ import SectionTitle from "@/components/UI/Shared/SectionTitle";
 import { baseurl } from "@/constant/URL";
 import { TAuthUser, TMeta, TUser } from "@/types";
 import generateDonorListApi from "@/utils/generateDonorListApi";
-import { Box, Grid, Typography } from "@mui/material";
-import PaginationController from "./components/PaginationController";
-import { getUserInfo } from "@/service/auth.service";
-import { cookies } from "next/headers";
 import { decodedToken } from "@/utils/jwtDecode";
+import { Box, Grid, Typography } from "@mui/material";
+import { cookies } from "next/headers";
+import PaginationController from "./components/PaginationController";
 
 const DonorPage = async ({
   searchParams,

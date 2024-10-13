@@ -3,6 +3,7 @@
 import BForm from "@/components/Form/BForm";
 import BInput from "@/components/Form/BInput";
 import SocialPlatform from "@/components/Shared/SocialPlatform/SocialPlatform";
+import LoginCredantial from "@/components/UI/Shared/LoginCredantial";
 import { TLoginData, loginData } from "@/data/loginData";
 import { TLoginProps, loginUser } from "@/service/actions/loginUser";
 import { storeUserInfo } from "@/service/auth.service";
@@ -68,9 +69,7 @@ const LoginForm = () => {
       >
         Login
       </Button>
-
-      <SocialPlatform title="Login with Social Platform" />
-
+      <LoginCredantial />
       <Typography
         sx={{
           textAlign: "center",
